@@ -61,7 +61,7 @@ executable Autobahn
                       , bitwise
                       , text
                       , deepseq
-                      , haskell-src-exts
+                      , haskell-src-exts == 1.17.*
                       , directory
                       , filepath
                       , bv
