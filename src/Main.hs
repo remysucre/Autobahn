@@ -1,5 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 
+import Soundness
+
 import Types
 import Rewrite
 import Profiling
@@ -53,15 +55,19 @@ fitness cfg reps files bangVecs = do
     
 main :: IO () 
 main = do 
-  hSetBuffering stdout LineBuffering
-  putStrLn "Configure optimization..."
-  cfgExist <- doesFileExist cfgFile
-  cfg <- if cfgExist then readCfg cfgFile else cliCfg
-  putStrLn "Setting up optimization process..."
-  putStrLn "Starting optimization process..."
-  gmain cfg
-  putStrLn $ "Optimization finished, please inspect and select candidate changes "
-        ++ "(found in AutobahnResults under project root)"
+  [path] <- getArgs
+  res <- checkBangs path
+  print res
+
+  --hSetBuffering stdout LineBuffering
+  --putStrLn "Configure optimization..."
+  --cfgExist <- doesFileExist cfgFile
+  --cfg <- if cfgExist then readCfg cfgFile else cliCfg
+  --putStrLn "Setting up optimization process..."
+  --putStrLn "Starting optimization process..."
+  --gmain cfg
+  --putStrLn $ "Optimization finished, please inspect and select candidate changes "
+  --      ++ "(found in AutobahnResults under project root)"
 
 gmain :: Cfg -> IO ()
 gmain autobahnCfg = do
