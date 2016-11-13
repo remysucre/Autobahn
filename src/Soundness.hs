@@ -15,11 +15,13 @@ checkBangs path = do
       sequence $ map (\bs' -> ((,) <$> ((==) <$> dmdAnal bs' <*> dmdAnal bs)
                                     <*> return bs')) (bsMutants bs)
     dmdAnal bs = do
-          print bs
+          putStrLn $ "bangs are " ++ show bs
           fc <- editBangs (path ++ ".hs") bs 
           writeFile (path ++ "opt.hs") fc 
           system $ "ghc -O2 -ddump-stranal -ddump-to-file -fforce-recomp " ++ path ++ "opt"
           log <- readFile $ path ++ "opt" ++ ".dump-stranal"
+          let log' = unlines . drop 4 . lines $ log
+          system $ "diff -y " ++ path ++ ".dump-stranal " ++ path ++ "opt.dump-stranal"
           system $ "rm " ++ path ++ "opt" ++ ".dump-stranal"
           return log
     bsMutants bs = mutate (length bs) bs
