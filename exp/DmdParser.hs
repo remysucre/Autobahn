@@ -10,7 +10,7 @@ import Text.Parsec ((<?>), (<|>))
 
 -- Syntax of Simplified Demands
 
-data Exp = Annot Binder Dmd deriving Show
+data Annot = Annot Binder Dmd deriving Show
 
 type Binder = String
 type Dmd = (StrDmd, UseDmd)
@@ -23,16 +23,16 @@ data UseDmd = U | A deriving Show
 type Parser = P.Parsec String ()
 
 parse :: Parser a -> P.SourceName -> String -> Either P.ParseError a
-parse = P.parse 
+parse = P.parse
 
-stranal :: Parser [Exp]
-stranal = P.many expr
+stranal :: Parser [Annot]
+stranal = P.many (P.try expr)
 
-expr :: Parser Exp
+expr :: Parser Annot
 expr = buildExpressionParser table term
     <?> "expression"
 
-term :: Parser Exp
+term :: Parser Annot
 term =  P.try (Annot <$> identifier <*> dmd)
     <|> P.anyToken *> expr
 
@@ -51,8 +51,8 @@ strdmd =  P.try (P.char 'S' *> return S)
       <|> P.try (P.char 'B' *> return B)
       <?> "strdmd"
 usedmd :: Parser UseDmd
-usedmd =  P.try (P.char 'U' *> return U)
-      <|> P.try (P.char 'A' *> return A)
+usedmd =  P.try (P.char 'A' *> return A)
+      <|> P.try (P.manyTill P.anyToken (P.lookAhead $ P.char '>') *> return U)
       <?> "usedmd"
 
 dmdDef :: LanguageDef st

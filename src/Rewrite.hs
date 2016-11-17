@@ -74,3 +74,11 @@ stripTop :: Module -> Module
 stripTop (Module a b c d e f decls) = Module a b c d e f (map rmBang decls)
     where rmBang (PatBind x (PParen (PBangPat pb)) y z) = PatBind x pb y z
           rmBang x = x
+
+
+--
+-- Annotate binders that are safe to bang
+--
+
+safeBangs :: Module -> [Annot] -> Module
+safeBangs = undefined
