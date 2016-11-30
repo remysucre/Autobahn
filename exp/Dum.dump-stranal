@@ -1,57 +1,60 @@
 
 ==================== Demand analysis ====================
-2016-11-13 17:26:11.488758795 UTC
+2016-11-30 16:59:50.030570888 UTC
 
 Result size of Demand analysis
-  = {terms: 30, types: 43, coercions: 0}
+  = {terms: 34, types: 40, coercions: 0}
 
--- RHS size: {terms: 14, types: 14, coercions: 0}
-f :: forall t_ay2. Bool -> (t_ay2, Bool) -> (t_ay2, Bool)
+-- RHS size: {terms: 17, types: 15, coercions: 0}
+f :: forall t_ay0. Bool -> (t_ay0, Bool) -> (t_ay0, Bool)
 [LclIdX,
  Arity=2,
  Str=DmdType <S,1*U><S,1*U(U,U)>m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [30 20] 40 30}]
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 20] 50 30}]
 f =
-  \ (@ t_ay2)
+  \ (@ t_ay0)
     (f_c_aqj [Dmd=<S,1*U>] :: Bool)
-    (f_p_aqk [Dmd=<S,1*U(U,U)>] :: (t_ay2, Bool)) ->
-    case f_p_aqk of wild_X7 [Dmd=<L,1*U(U,U)>] { (f_a_aql, f_b_aqm) ->
-    case f_c_aqj of _ [Occ=Dead, Dmd=<L,A>] {
-      False -> wild_X7;
+    (f_p_aqk [Dmd=<S,1*U(U,U)>] :: (t_ay0, Bool)) ->
+    case f_c_aqj of f_c_Xqn [Dmd=<S,1*U>] { __DEFAULT ->
+    case f_p_aqk of wild_X9 [Dmd=<L,1*U(U,U)>] { (f_a_aql, f_b_aqm) ->
+    case f_c_Xqn of _ [Occ=Dead, Dmd=<L,A>] {
+      False -> wild_X9;
       True -> (f_a_aql, GHC.Types.True)
     }
     }
+    }
 
--- RHS size: {terms: 4, types: 7, coercions: 0}
-thing :: forall t_axD t_axE. (t_axD, t_axE) -> (t_axD, t_axE)
+-- RHS size: {terms: 5, types: 6, coercions: 0}
+thing :: forall t_axB t_axC. t_axB -> t_axC -> ()
 [LclIdX,
- Arity=1,
- Str=DmdType <S,1*U(U,U)>m,
+ Arity=2,
+ Str=DmdType <L,A><L,A>,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True,
-         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=True)}]
+         Guidance=ALWAYS_IF(arity=2,unsat_ok=True,boring_ok=True)}]
 thing =
-  \ (@ t_axD)
-    (@ t_axE)
-    (p_axr [Dmd=<S,1*U(U,U)>] :: (t_axD, t_axE)) ->
-    p_axr
+  \ (@ t_axB)
+    (@ t_axC)
+    _ [Occ=Dead, Dmd=<L,A>]
+    _ [Occ=Dead, Dmd=<L,A>] ->
+    GHC.Tuple.()
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_syG :: GHC.Types.TrName
+$trModule_syz :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_syG = GHC.Types.TrNameS "main"#
+$trModule_syz = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_syH :: GHC.Types.TrName
+$trModule_syA :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_syH = GHC.Types.TrNameS "Dum"#
+$trModule_syA = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -59,6 +62,6 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_syG $trModule_syH
+Dum.$trModule = GHC.Types.Module $trModule_syz $trModule_syA
 
 
