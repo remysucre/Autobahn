@@ -80,5 +80,5 @@ stripTop (Module a b c d e f decls) = Module a b c d e f (map rmBang decls)
 -- Annotate binders that are safe to bang
 --
 
-safeBangs :: Module -> [Annot] -> Module
-safeBangs = undefined
+-- safeBangs :: Module -> [Annot] -> Module
+-- safeBangs = undefined
