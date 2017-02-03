@@ -1,4 +1,4 @@
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE BangPatterns, FlexibleContexts #-}
 
 import qualified DmdParser as DP
 import Preprocess
@@ -8,6 +8,8 @@ import System.Process
 import Language.Haskell.Exts
 import Language.Haskell.Exts.Syntax
 import Data.Generics.Uniplate.Data
+import Control.Monad
+import Control.Monad.State.Strict
 
 main = do 
   system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
@@ -25,8 +27,9 @@ main = do
   parres <- par "/home/rem/Autobahn/exp/Dumrn.hs"
   let bs = binders parres
   print bs
-  let sbs = markSafePat bs res
-  print $ map prettyPrint sbs
+  let sbs = safePats bs res
+  let (safed, _) = markSafePats sbs orig
+  putStrLn $ prettyPrint safed
 
 
 mentions :: Pat -> String -> Bool
@@ -39,14 +42,25 @@ annotate (PBangPat p)  (DP.S, _)= (PAsPat (Ident "safebang") (PBangPat p))
 annotate (PBangPat p) (_, DP.A)= p -- absent, might as well take bang off
 annotate p _ = p
 
-markSafePat :: [Pat] -> [DP.Annot] -> [Pat]
-markSafePat ps anns = foldl (\ps (DP.Annot b a) -> 
+safePats :: [Pat] -> [DP.Annot] -> [Pat]
+safePats ps anns = foldl (\ps (DP.Annot b a) -> 
                               map (\p -> 
                                       if p `mentions` b 
                                       then annotate p a
                                       else p) 
                                   ps) 
                             ps anns
+
+markSafePats :: [Pat] -> Module -> (Module, [Pat])
+markSafePats sps x = runState (transformBiM go x) sps
+  where go :: (MonadState [Pat] m, Uniplate Pat) => Pat -> m Pat
+        go pb@(PBangPat p) = do 
+           (p:ps) <- get
+           put ps
+           case p 
+             of (PAsPat (Ident "safebang") (PBangPat _)) -> return (PAsPat (Ident "safebang") pb)
+                _ -> return pb
+        go x = return x
 
 binders :: Module -> [Pat]
 binders = universeBi
