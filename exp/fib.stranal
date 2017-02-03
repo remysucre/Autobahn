@@ -1,0 +1,59 @@
+
+==================== Demand analysis ====================
+2017-02-03 13:26:28.299202679 UTC
+
+Result size of Demand analysis
+  = {terms: 34, types: 14, coercions: 0}
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+$trModule_s1L5 :: GHC.Types.TrName
+[LclId,
+ Str=DmdType m1,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
+$trModule_s1L5 = GHC.Types.TrNameS "main"#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+$trModule_s1L6 :: GHC.Types.TrName
+[LclId,
+ Str=DmdType m1,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
+$trModule_s1L6 = GHC.Types.TrNameS "Dum"#
+
+-- RHS size: {terms: 3, types: 0, coercions: 0}
+Dum.$trModule :: GHC.Types.Module
+[LclIdX,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
+Dum.$trModule = GHC.Types.Module $trModule_s1L5 $trModule_s1L6
+
+Rec {
+-- RHS size: {terms: 23, types: 7, coercions: 0}
+fib [Occ=LoopBreaker] :: Int -> Integer -> Integer -> Integer
+[LclIdX,
+ Arity=3,
+ Str=DmdType <S(S),1*U(1*U)><L,1*U><S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0 20] 121 0}]
+fib =
+  \ (ds_d1KW [Dmd=<S(S),1*U(1*U)>] :: Int)
+    (ds_d1KX [Dmd=<L,1*U>] :: Integer)
+    (b_aGN [Dmd=<S,1*U>] :: Integer) ->
+    case ds_d1KW
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# ds_d1L0 [Dmd=<S,1*U>] ->
+    case ds_d1L0 of ds_X1L8 {
+      __DEFAULT ->
+        case b_aGN of b_XGU [Dmd=<S,U>] { __DEFAULT ->
+        fib
+          (GHC.Types.I# (GHC.Prim.-# ds_X1L8 1#))
+          b_XGU
+          (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger ds_d1KX b_XGU)
+        };
+      0# -> b_aGN
+    }
+    }
+end Rec }
+
+

@@ -1,0 +1,11 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+fib :: Int -> Integer -> Integer -> Integer
+fib 0 _ b_aGN = b_aGN
+fib n_aGO a_aGP !b_aGQ
+  = fib (n_aGO - 1) b_aGQ (a_aGP + b_aGQ)
+
+[Annot "ds_d1KX" (L,U),Annot "b_aGN" (S,U),Annot "ds_d1L0" (S,U),Annot "b_XGU" (S,U)]
+[PLit Signless (Int 0),PWildCard,PVar (Ident "b_aGN"),PVar (Ident "n_aGO"),PVar (Ident "a_aGP"),PBangPat (PVar (Ident "b_aGQ")),PVar (Ident "b_aGQ")]
+["0","_","b_aGN","n_aGO","a_aGP","!b_aGQ","b_aGQ"]

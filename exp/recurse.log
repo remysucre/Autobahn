@@ -1,0 +1,10 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+u = 0 : go (head u) (tail u)
+go !a_aBi as_aBj
+  = a_aBi + 1 : go (head as_aBj) (tail as_aBj)
+
+[Annot "a_aBi" (S,U),Annot "a_XBo" (L,U),Annot "eta_B2" (S,U),Annot "dNum_aMD" (L,U),Annot "eta_B2" (S,U),Annot "a_aBi" (S,U)]
+[PVar (Ident "u"),PBangPat (PVar (Ident "a_aBi")),PVar (Ident "a_aBi"),PVar (Ident "as_aBj")]
+["u","safebang@!a_aBi","a_aBi","as_aBj"]
