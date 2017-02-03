@@ -13,7 +13,7 @@ f !f_c f_p = case f_p
                        then (f_a, True)
                        else f_p
 
-thing p = case p of (a, b) -> p
+thing p s = () --case p of (a, b) -> p
 {- useH (x, y) = ()
 lazyAbs x = ()
 yAbs !x = ()

@@ -1,3 +1,5 @@
+{-# LANGUAGE BangPatterns #-}
+
 module Preprocess (dumprn2hs)
 where
 
@@ -20,7 +22,7 @@ replace old new xs@(y:ys) =
       Just ys' -> new ++ replace old new ys' 
 
 bangParseMode :: String -> ParseMode
-bangParseMode path = defaultParseMode
+bangParseMode !path = defaultParseMode
   { parseFilename = path
   , baseLanguage = Haskell2010
   , extensions = [EnableExtension BangPatterns]

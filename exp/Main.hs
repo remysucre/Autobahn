@@ -4,15 +4,18 @@ import qualified DmdParser as DP
 import Preprocess
 
 import System.Environment
+import System.Process
 import Language.Haskell.Exts
 import Language.Haskell.Exts.Syntax
 import Data.Generics.Uniplate.Data
 
 main = do 
-  fc <- dumprn2hs "Dum"
-  putStr fc
+  system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
+  fcd <- dumprn2hs "Dum"
+  putStr fcd
+  writeFile "Dumrn.hs" fcd
 
-  !fc <- readFile "test.dump"
+  !fc <- readFile "Dum.dump-stranal"
   -- let res0 = DP.parse DP.stranal "src" "[asdf [Dmd=<S,A>]]"
   let Right res = DP.parse DP.stranal "src" fc 
   -- -- let res1 = parse remany "as" "[a]"
@@ -61,5 +64,7 @@ bangParseMode path = defaultParseMode
 
 par :: String -> IO Module
 par path = do
-  ParseOk res <- parseFileWithMode (bangParseMode path) path
-  return res
+  pres <- parseFileWithMode (bangParseMode path) path
+  case pres of 
+       ParseOk res -> return res
+       ParseFailed loc e -> error $ show loc ++ e
