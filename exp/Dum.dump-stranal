@@ -1,114 +1,114 @@
 
 ==================== Demand analysis ====================
-2017-02-12 02:53:27.289511 UTC
+2017-02-12 03:32:13.582195 UTC
 
 Result size of Demand analysis
   = {terms: 73, types: 62, coercions: 0}
 
 -- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_sOc :: Integer
+lvl_sOe :: Integer
 [LclId,
  Str=DmdType,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_sOc = 1
+lvl_sOe = 1
 
 Rec {
 -- RHS size: {terms: 14, types: 7, coercions: 0}
-go_sOa [Occ=LoopBreaker] :: Integer -> [Integer] -> [Integer]
+go_sOc [Occ=LoopBreaker] :: Integer -> [Integer] -> [Integer]
 [LclId,
  Arity=2,
  CallArity=2,
  Str=DmdType <S,1*U><L,U>m2,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0] 120 30}]
-go_sOa =
-  \ (a_aBj [Dmd=<S,1*U>] :: Integer) (as_aBk :: [Integer]) ->
-    case a_aBj of a_XBp [Dmd=<L,1*U>] { __DEFAULT ->
+go_sOc =
+  \ (a_aBl [Dmd=<S,1*U>] :: Integer) (as_aBm :: [Integer]) ->
+    case a_aBl of a_XBr [Dmd=<L,1*U>] { __DEFAULT ->
     GHC.Types.:
       @ Integer
-      (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger a_XBp lvl_sOc)
-      (go_sOa (head @ Integer as_aBk) (tail @ Integer as_aBk))
+      (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger a_XBr lvl_sOe)
+      (go_sOc (head @ Integer as_aBm) (tail @ Integer as_aBm))
     }
 end Rec }
 
 -- RHS size: {terms: 5, types: 3, coercions: 0}
-$sgo_sO5 :: Integer -> [Integer] -> [Integer]
+$sgo_sO7 :: Integer -> [Integer] -> [Integer]
 [LclId,
  Arity=2,
  Str=DmdType <S,1*U><L,U>m2,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True,
          Guidance=ALWAYS_IF(arity=2,unsat_ok=True,boring_ok=True)}]
-$sgo_sO5 =
+$sgo_sO7 =
   \ (eta_B2 [Dmd=<S,1*U>] :: Integer) (eta_B1 :: [Integer]) ->
-    go_sOa eta_B2 eta_B1
+    go_sOc eta_B2 eta_B1
 
 -- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_sOd :: Integer
+lvl_sOf :: Integer
 [LclId,
  Str=DmdType,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_sOd = 1
+lvl_sOf = 1
 
 -- RHS size: {terms: 27, types: 22, coercions: 0}
-go :: forall a_aCI. Num a_aCI => a_aCI -> [a_aCI] -> [a_aCI]
+go :: forall a_aCK. Num a_aCK => a_aCK -> [a_aCK] -> [a_aCK]
 [LclIdX,
  Arity=3,
  Str=DmdType <L,U(C(C1(U)),A,A,A,A,A,1*C1(U))><S,1*U><L,U>,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [60 0 0] 230 0},
  RULES: "SPEC go @ Integer" [ALWAYS]
-            forall ($dNum_sO4 :: Num Integer).
-              go @ Integer $dNum_sO4
-              = $sgo_sO5]
+            forall ($dNum_sO6 :: Num Integer).
+              go @ Integer $dNum_sO6
+              = $sgo_sO7]
 go =
-  \ (@ a_aCI)
-    ($dNum_aME [Dmd=<L,U(C(C1(U)),A,A,A,A,A,1*C1(U))>] :: Num a_aCI)
-    (eta_B2 [Dmd=<S,1*U>] :: a_aCI)
-    (eta_B1 :: [a_aCI]) ->
+  \ (@ a_aCK)
+    ($dNum_aMG [Dmd=<L,U(C(C1(U)),A,A,A,A,A,1*C1(U))>] :: Num a_aCK)
+    (eta_B2 [Dmd=<S,1*U>] :: a_aCK)
+    (eta_B1 :: [a_aCK]) ->
     let {
-      lvl_sOe :: a_aCI
+      lvl_sOg :: a_aCK
       [LclId,
-       Str=DmdType {aME-><S(LLLLLLC(S)),A>},
+       Str=DmdType {aMG-><S(LLLLLLC(S)),A>},
        Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
                WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 30 0}]
-      lvl_sOe = fromInteger @ a_aCI $dNum_aME lvl_sOd } in
+      lvl_sOg = fromInteger @ a_aCK $dNum_aMG lvl_sOf } in
     letrec {
-      go_sO3 [Occ=LoopBreaker] :: a_aCI -> [a_aCI] -> [a_aCI]
+      go_sO5 [Occ=LoopBreaker] :: a_aCK -> [a_aCK] -> [a_aCK]
       [LclId,
        Arity=2,
        CallArity=2,
        Str=DmdType <S,1*U><L,U>,
        Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True, ConLike=True,
                WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0] 130 30}]
-      go_sO3 =
-        \ (a_aBj [Dmd=<S,1*U>] :: a_aCI) (as_aBk :: [a_aCI]) ->
-          case a_aBj of a_XBp { __DEFAULT ->
+      go_sO5 =
+        \ (a_aBl [Dmd=<S,1*U>] :: a_aCK) (as_aBm :: [a_aCK]) ->
+          case a_aBl of a_XBr { __DEFAULT ->
           GHC.Types.:
-            @ a_aCI
-            (+ @ a_aCI $dNum_aME a_XBp lvl_sOe)
-            (go_sO3 (head @ a_aCI as_aBk) (tail @ a_aCI as_aBk))
+            @ a_aCK
+            (+ @ a_aCK $dNum_aMG a_XBr lvl_sOg)
+            (go_sO5 (head @ a_aCK as_aBm) (tail @ a_aCK as_aBm))
           }; } in
-    go_sO3 eta_B2 eta_B1
+    go_sO5 eta_B2 eta_B1
 
 -- RHS size: {terms: 1, types: 0, coercions: 0}
-u_sNX :: Integer
+u_sNZ :: Integer
 [LclId,
  Str=DmdType,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-u_sNX = 0
+u_sNZ = 0
 
 Rec {
 -- RHS size: {terms: 3, types: 0, coercions: 0}
-u_sNY [Occ=LoopBreaker] :: [Integer]
+u_sO0 [Occ=LoopBreaker] :: [Integer]
 [LclId,
  Str=DmdType,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
          WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 30 0}]
-u_sNY = go_sOa u_sNX u_sNY
+u_sO0 = go_sOc u_sNZ u_sO0
 end Rec }
 
 -- RHS size: {terms: 3, types: 1, coercions: 0}
@@ -117,23 +117,23 @@ u :: [Integer]
  Str=DmdType m2,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-u = GHC.Types.: @ Integer u_sNX u_sNY
+u = GHC.Types.: @ Integer u_sNZ u_sO0
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_sNZ :: GHC.Types.TrName
+$trModule_sO1 :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_sNZ = GHC.Types.TrNameS "main"#
+$trModule_sO1 = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_sO0 :: GHC.Types.TrName
+$trModule_sO2 :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_sO0 = GHC.Types.TrNameS "Dum"#
+$trModule_sO2 = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -141,6 +141,6 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_sNZ $trModule_sO0
+Dum.$trModule = GHC.Types.Module $trModule_sO1 $trModule_sO2
 
 

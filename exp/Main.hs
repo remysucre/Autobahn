@@ -60,7 +60,7 @@ markSafePats sps x = runState (transformBiM go x) sps
           put ps
           case p
             of (PAsPat (Ident "safebang") _) -> return (PAsPat (Ident "safebang") pb)
-               _ -> return (PAsPat (Ident "lol") pb)
+               _ -> return pb
         -- go px = return px
 
 binders :: Module -> [Pat]
