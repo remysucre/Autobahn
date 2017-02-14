@@ -1,6 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 module Dum where
-u = 0 : go (head u) (tail u)
-go !a_aBj as_aBk
-  = a_aBj + 1 : go (head as_aBk) (tail as_aBk)
+fib :: Int -> Integer -> Integer -> Integer
+fib 0 _ b_aGO = b_aGO
+fib n_aGP a_aGQ !b_aGR
+  = fib (n_aGP - 1) b_aGR (a_aGQ + b_aGR)
 

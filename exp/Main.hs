@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns, FlexibleContexts #-}
+import Debug.Trace
 
 import qualified DmdParser as DP
 import Preprocess
@@ -28,11 +29,12 @@ main = do
   print $ map prettyPrint bs
   let sbs = safePats bs res
   print $ map prettyPrint sbs
-  print $ sbs
+  print sbs
   print $ length sbs
   -- let sbs = map (PVar . Ident) ["a", "b", "c", "d"]
+  print "ABOUT TO MARK"
   let (safed, safebangs) = markSafePats sbs parres
-  print $ map prettyPrint safebangs
+  putStrLn $ "safed bangs" ++ show (map prettyPrint safebangs)
   putStrLn $ prettyPrint safed
   let sfbs = binders safed
   print $ map prettyPrint sfbs
@@ -64,19 +66,26 @@ markSafePats sps x = runState (transformBiM go x) sps
   where go :: (MonadState [Pat] m) => Pat -> m Pat
         go pb@(PBangPat pv) = do
           (p:ps) <- get
-          put ps
+          trace ("bang " ++ show pb ++ "," ++ show p) (put ps)
           case p
             of (PAsPat (Ident "safebang") _) -> return pb
                (PAsPat (Ident "remove") _) -> return (PAsPat (Ident "removed") pv)
                -- (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
                _ -> return (PAsPat (Ident "investigate") pv)
         go px = do
-          (_:ps) <- get
-          put ps
+          (p:ps) <- get
+          -- put ps
+          trace ("NOT bang " ++ show px ++ "," ++ show p) (put ps)
           return px
 
 binders :: Module -> [Pat]
-binders = universeBi
+binders modl = bs
+  where (_, bs) = runState (transformBiM go modl) []
+        go :: (MonadState [Pat] m) => Pat -> m Pat
+        go p = do
+          ps <- get
+          put $ ps ++ [p]
+          return p
 
 bangParseMode :: String -> ParseMode
 bangParseMode path = defaultParseMode
