@@ -1,6 +1,7 @@
 
 ==================== Renamer ====================
-Dum.u = 0 : Dum.go (head Dum.u) (tail Dum.u)
-Dum.go !a_aBj as_aBk
-  = a_aBj + 1 : Dum.go (head as_aBk) (tail as_aBk)
+Dum.fib :: Int -> Integer -> Integer -> Integer
+Dum.fib 0 _ b_aGK = b_aGK
+Dum.fib n_aGL a_aGM !b_aGN
+  = Dum.fib (n_aGL - 1) b_aGN (a_aGM + b_aGN)
 

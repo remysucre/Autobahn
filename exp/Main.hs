@@ -30,7 +30,7 @@ main = do
   print $ map prettyPrint sbs
   -- let sbs = map (PVar . Ident) ["a", "b", "c", "d"]
   let (safed, safebangs) = markSafePats sbs parres
-  print $ map prettyPrint safebangs
+  -- print $ map prettyPrint safebangs
   putStrLn $ prettyPrint safed
   let sfbs = binders safed
   print $ map prettyPrint sfbs
@@ -63,8 +63,8 @@ markSafePats sps x = runState (transformBiM go x) sps
           put ps
           case p
             of (PAsPat (Ident "safebang") _) -> return pb
-               (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
-               _ -> return pb
+               -- (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
+               _ -> return (PAsPat (Ident "investigate") pv)
         go px = return px
 
 binders :: Module -> [Pat]
