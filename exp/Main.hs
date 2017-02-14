@@ -28,12 +28,16 @@ main = do
   print $ map prettyPrint bs
   let sbs = safePats bs res
   print $ map prettyPrint sbs
+  print $ sbs
+  print $ length sbs
   -- let sbs = map (PVar . Ident) ["a", "b", "c", "d"]
   let (safed, safebangs) = markSafePats sbs parres
-  -- print $ map prettyPrint safebangs
+  print $ map prettyPrint safebangs
   putStrLn $ prettyPrint safed
   let sfbs = binders safed
   print $ map prettyPrint sfbs
+  print $ length sfbs
+  print $ zip (map prettyPrint sfbs) (map prettyPrint sbs)
 
 
 mentions :: Pat -> String -> Bool
@@ -43,7 +47,8 @@ mentions _ _ = False
 
 annotate :: Pat -> DP.Dmd -> Pat
 annotate (PBangPat p)  (DP.S, _)= PAsPat (Ident "safebang") (PBangPat p)
-annotate (PBangPat p) (_, DP.A)= p -- absent, might as well take bang off
+annotate (PBangPat p) (_, DP.A)=  PAsPat (Ident "remove") (PBangPat p) -- absent, might as well take bang off
+annotate (PBangPat p) (_, _)=  PAsPat (Ident "investigate") (PBangPat p) -- absent, might as well take bang off
 annotate p _ = p
 
 safePats :: [Pat] -> [DP.Annot] -> [Pat]
@@ -58,14 +63,17 @@ markSafePats :: [Pat] -> Module -> (Module, [Pat])
 markSafePats sps x = runState (transformBiM go x) sps
   where go :: (MonadState [Pat] m) => Pat -> m Pat
         go pb@(PBangPat pv) = do
-        -- go pb = do
           (p:ps) <- get
           put ps
           case p
             of (PAsPat (Ident "safebang") _) -> return pb
+               (PAsPat (Ident "remove") _) -> return (PAsPat (Ident "removed") pv)
                -- (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
                _ -> return (PAsPat (Ident "investigate") pv)
-        go px = return px
+        go px = do
+          (_:ps) <- get
+          put ps
+          return px
 
 binders :: Module -> [Pat]
 binders = universeBi

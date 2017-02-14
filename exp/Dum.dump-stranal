@@ -1,25 +1,139 @@
 
 ==================== Demand analysis ====================
-2017-02-14 02:24:36.6849 UTC
+2017-02-14 03:08:40.484411 UTC
 
 Result size of Demand analysis
-  = {terms: 34, types: 14, coercions: 0}
+  = {terms: 73, types: 62, coercions: 0}
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+lvl_sOc :: Integer
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
+lvl_sOc = 1
+
+Rec {
+-- RHS size: {terms: 14, types: 7, coercions: 0}
+go_sOa [Occ=LoopBreaker] :: Integer -> [Integer] -> [Integer]
+[LclId,
+ Arity=2,
+ CallArity=2,
+ Str=DmdType <S,1*U><L,U>m2,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0] 120 30}]
+go_sOa =
+  \ (a_aBj [Dmd=<S,1*U>] :: Integer) (as_aBk :: [Integer]) ->
+    case a_aBj of a_XBp [Dmd=<L,1*U>] { __DEFAULT ->
+    GHC.Types.:
+      @ Integer
+      (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger a_XBp lvl_sOc)
+      (go_sOa (head @ Integer as_aBk) (tail @ Integer as_aBk))
+    }
+end Rec }
+
+-- RHS size: {terms: 5, types: 3, coercions: 0}
+$sgo_sO5 :: Integer -> [Integer] -> [Integer]
+[LclId,
+ Arity=2,
+ Str=DmdType <S,1*U><L,U>m2,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=2,unsat_ok=True,boring_ok=True)}]
+$sgo_sO5 =
+  \ (eta_B2 [Dmd=<S,1*U>] :: Integer) (eta_B1 :: [Integer]) ->
+    go_sOa eta_B2 eta_B1
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+lvl_sOd :: Integer
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
+lvl_sOd = 1
+
+-- RHS size: {terms: 27, types: 22, coercions: 0}
+go :: forall a_aCI. Num a_aCI => a_aCI -> [a_aCI] -> [a_aCI]
+[LclIdX,
+ Arity=3,
+ Str=DmdType <L,U(C(C1(U)),A,A,A,A,A,1*C1(U))><S,1*U><L,U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [60 0 0] 230 0},
+ RULES: "SPEC go @ Integer" [ALWAYS]
+            forall ($dNum_sO4 :: Num Integer).
+              go @ Integer $dNum_sO4
+              = $sgo_sO5]
+go =
+  \ (@ a_aCI)
+    ($dNum_aME [Dmd=<L,U(C(C1(U)),A,A,A,A,A,1*C1(U))>] :: Num a_aCI)
+    (eta_B2 [Dmd=<S,1*U>] :: a_aCI)
+    (eta_B1 :: [a_aCI]) ->
+    let {
+      lvl_sOe :: a_aCI
+      [LclId,
+       Str=DmdType {aME-><S(LLLLLLC(S)),A>},
+       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
+               WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 30 0}]
+      lvl_sOe = fromInteger @ a_aCI $dNum_aME lvl_sOd } in
+    letrec {
+      go_sO3 [Occ=LoopBreaker] :: a_aCI -> [a_aCI] -> [a_aCI]
+      [LclId,
+       Arity=2,
+       CallArity=2,
+       Str=DmdType <S,1*U><L,U>,
+       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True, ConLike=True,
+               WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0] 130 30}]
+      go_sO3 =
+        \ (a_aBj [Dmd=<S,1*U>] :: a_aCI) (as_aBk :: [a_aCI]) ->
+          case a_aBj of a_XBp { __DEFAULT ->
+          GHC.Types.:
+            @ a_aCI
+            (+ @ a_aCI $dNum_aME a_XBp lvl_sOe)
+            (go_sO3 (head @ a_aCI as_aBk) (tail @ a_aCI as_aBk))
+          }; } in
+    go_sO3 eta_B2 eta_B1
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+u_sNX :: Integer
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
+u_sNX = 0
+
+Rec {
+-- RHS size: {terms: 3, types: 0, coercions: 0}
+u_sNY [Occ=LoopBreaker] :: [Integer]
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
+         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 30 0}]
+u_sNY = go_sOa u_sNX u_sNY
+end Rec }
+
+-- RHS size: {terms: 3, types: 1, coercions: 0}
+u :: [Integer]
+[LclIdX,
+ Str=DmdType m2,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
+u = GHC.Types.: @ Integer u_sNX u_sNY
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s1L2 :: GHC.Types.TrName
+$trModule_sNZ :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s1L2 = GHC.Types.TrNameS "main"#
+$trModule_sNZ = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s1L3 :: GHC.Types.TrName
+$trModule_sO0 :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s1L3 = GHC.Types.TrNameS "Dum"#
+$trModule_sO0 = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -27,33 +141,6 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_s1L2 $trModule_s1L3
-
-Rec {
--- RHS size: {terms: 23, types: 7, coercions: 0}
-fib [Occ=LoopBreaker] :: Int -> Integer -> Integer -> Integer
-[LclIdX,
- Arity=3,
- Str=DmdType <S(S),1*U(1*U)><L,1*U><S,1*U>,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0 20] 121 0}]
-fib =
-  \ (ds_d1KT [Dmd=<S(S),1*U(1*U)>] :: Int)
-    (ds_d1KU [Dmd=<L,1*U>] :: Integer)
-    (b_aGK [Dmd=<S,1*U>] :: Integer) ->
-    case ds_d1KT
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# ds_d1KX [Dmd=<S,1*U>] ->
-    case ds_d1KX of ds_X1L5 {
-      __DEFAULT ->
-        case b_aGK of b_XGR [Dmd=<S,U>] { __DEFAULT ->
-        fib
-          (GHC.Types.I# (GHC.Prim.-# ds_X1L5 1#))
-          b_XGR
-          (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger ds_d1KU b_XGR)
-        };
-      0# -> b_aGK
-    }
-    }
-end Rec }
+Dum.$trModule = GHC.Types.Module $trModule_sNZ $trModule_sO0
 
 

@@ -1,0 +1,24 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+[Annot "dNum_a2ac" (L,U),Annot "dNum_a2ad" (L,U),Annot "c0_axG" (S,U),Annot "c1_axH" (S,U),Annot "dNum_a2ba" (L,U),Annot "dNum_a2bb" (L,U),Annot "dIntegral_a2bc" (L,U),Annot "eta_B2" (S,U),Annot "eta_B1" (S,U),Annot "ds_d2c2" (S,U),Annot "c_aql" (S,U),Annot "ipv_s2cK" (S,U),Annot "ipv_s2cN" (S,U),Annot "ipv_s2cO" (S,U)]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+f [] (!c_aql) = c_aql
+f (!((!(x_aqm : xs_aqn)))) (!c_axs)
+  = f xs_aqn (uncurry (tick x_aqm) c_axs)
+tick x_axF (!c0_axG) (!c1_axH)
+  | even x_axF = (c0_axG, c1_axH + 1)
+  | otherwise = (c0_axG + 1, c1_axH)
+["[]","(!c_aql)","!c_aql","c_aql","(!((!(x_aqm : xs_aqn))))","!((!(x_aqm : xs_aqn)))","((!(x_aqm : xs_aqn)))","(!(x_aqm : xs_aqn))","!(x_aqm : xs_aqn)","(x_aqm : xs_aqn)","x_aqm : xs_aqn","x_aqm","xs_aqn","(!c_axs)","!c_axs","c_axs","x_axF","(!c0_axG)","!c0_axG","c0_axG","(!c1_axH)","!c1_axH","c1_axH"]
+["[]","(!c_aql)","safebang@!c_aql","c_aql","(!((!(x_aqm : xs_aqn))))","!((!(x_aqm : xs_aqn)))","((!(x_aqm : xs_aqn)))","(!(x_aqm : xs_aqn))","!(x_aqm : xs_aqn)","(x_aqm : xs_aqn)","x_aqm : xs_aqn","x_aqm","xs_aqn","(!c_axs)","!c_axs","c_axs","x_axF","(!c0_axG)","safebang@!c0_axG","c0_axG","(!c1_axH)","safebang@!c1_axH","c1_axH"]
+23
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+f [] (!c_aql) = c_aql
+f (investigate@((investigate@(x_aqm : xs_aqn))))
+  (investigate@c_axs) = f xs_aqn (uncurry (tick x_aqm) c_axs)
+tick x_axF (!c0_axG) (!c1_axH)
+  | even x_axF = (c0_axG, c1_axH + 1)
+  | otherwise = (c0_axG + 1, c1_axH)
+["[]","(!c_aql)","!c_aql","c_aql","(investigate@((investigate@(x_aqm : xs_aqn))))","investigate@((investigate@(x_aqm : xs_aqn)))","((investigate@(x_aqm : xs_aqn)))","(investigate@(x_aqm : xs_aqn))","investigate@(x_aqm : xs_aqn)","(x_aqm : xs_aqn)","x_aqm : xs_aqn","x_aqm","xs_aqn","(investigate@c_axs)","investigate@c_axs","c_axs","x_axF","(!c0_axG)","!c0_axG","c0_axG","(!c1_axH)","!c1_axH","c1_axH"]
+23
+[("[]","[]"),("(!c_aql)","(!c_aql)"),("!c_aql","safebang@!c_aql"),("c_aql","c_aql"),("(investigate@((investigate@(x_aqm : xs_aqn))))","(!((!(x_aqm : xs_aqn))))"),("investigate@((investigate@(x_aqm : xs_aqn)))","!((!(x_aqm : xs_aqn)))"),("((investigate@(x_aqm : xs_aqn)))","((!(x_aqm : xs_aqn)))"),("(investigate@(x_aqm : xs_aqn))","(!(x_aqm : xs_aqn))"),("investigate@(x_aqm : xs_aqn)","!(x_aqm : xs_aqn)"),("(x_aqm : xs_aqn)","(x_aqm : xs_aqn)"),("x_aqm : xs_aqn","x_aqm : xs_aqn"),("x_aqm","x_aqm"),("xs_aqn","xs_aqn"),("(investigate@c_axs)","(!c_axs)"),("investigate@c_axs","!c_axs"),("c_axs","c_axs"),("x_axF","x_axF"),("(!c0_axG)","(!c0_axG)"),("!c0_axG","safebang@!c0_axG"),("c0_axG","c0_axG"),("(!c1_axH)","(!c1_axH)"),("!c1_axH","safebang@!c1_axH"),("c1_axH","c1_axH")]
