@@ -1,8 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 module Dum where
-
--- Fibonnacci sequence with accum. param.
-fib :: Int -> Integer -> Integer -> Integer
-fib 0 _ b = b
-fib n a !b = fib (n - 1) b (a + b)
-
+f [] (!c) = c
+f (!((!(x : xs)))) (!c) = f xs (uncurry (tick x) c)
+tick x (!c0) (!c1)
+  | even x = (c0, c1 + 1)
+  | otherwise = (c0 + 1, c1)

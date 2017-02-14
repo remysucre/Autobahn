@@ -1,7 +1,9 @@
 
 ==================== Renamer ====================
-Dum.fib :: Int -> Integer -> Integer -> Integer
-Dum.fib 0 _ b_aGO = b_aGO
-Dum.fib n_aGP a_aGQ !b_aGR
-  = Dum.fib (n_aGP - 1) b_aGR (a_aGQ + b_aGR)
+Dum.f [] (!c_aqo) = c_aqo
+Dum.f (!((!(x_aqp : xs_aqq)))) (!c_axv)
+  = Dum.f xs_aqq (uncurry (Dum.tick x_aqp) c_axv)
+Dum.tick x_axI (!c0_axJ) (!c1_axK)
+  | even x_axI = (c0_axJ, c1_axK + 1)
+  | otherwise = (c0_axJ + 1, c1_axK)
 

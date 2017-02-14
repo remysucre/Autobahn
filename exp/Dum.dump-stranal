@@ -1,25 +1,139 @@
 
 ==================== Demand analysis ====================
-2017-02-14 16:29:49.610228 UTC
+2017-02-14 16:59:52.738909 UTC
 
 Result size of Demand analysis
-  = {terms: 34, types: 14, coercions: 0}
+  = {terms: 84, types: 113, coercions: 0}
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+lvl_s2d3 :: Integer
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
+lvl_s2d3 = 1
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+lvl_s2d4 :: Integer
+[LclId,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
+lvl_s2d4 = 1
+
+-- RHS size: {terms: 37, types: 27, coercions: 0}
+tick
+  :: forall a_aSj t_aSm a_aSI.
+     (Num a_aSI, Num t_aSm, Integral a_aSj) =>
+     a_aSj -> a_aSI -> t_aSm -> (a_aSI, t_aSm)
+[LclIdX,
+ Arity=6,
+ Str=DmdType <L,U(1*C1(C1(U)),A,A,A,A,A,1*C1(U))><L,U(1*C1(C1(U)),A,A,A,A,A,1*C1(U))><S(SLLLLLLLL),U(U,A,A,C(C1(U)),A,A,A,A,A)><L,U><S,1*U><S,1*U>m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [60 60 0 0 20 20] 230 60}]
+tick =
+  \ (@ a_aSj)
+    (@ t_aSm)
+    (@ a_aSI)
+    ($dNum_a2af [Dmd=<L,U(1*C1(C1(U)),A,A,A,A,A,1*C1(U))>]
+       :: Num a_aSI)
+    ($dNum_a2ag [Dmd=<L,U(1*C1(C1(U)),A,A,A,A,A,1*C1(U))>]
+       :: Num t_aSm)
+    ($dIntegral_a2ah [Dmd=<S(SLLLLLLLL),U(U,A,A,C(C1(U)),A,A,A,A,A)>]
+       :: Integral a_aSj)
+    (x_axI :: a_aSj)
+    (c0_axJ [Dmd=<S,1*U>] :: a_aSI)
+    (c1_axK [Dmd=<S,1*U>] :: t_aSm) ->
+    case c0_axJ of c0_XxT { __DEFAULT ->
+    case c1_axK of c1_XxV { __DEFAULT ->
+    case even @ a_aSj $dIntegral_a2ah x_axI
+    of _ [Occ=Dead, Dmd=<L,A>] {
+      False ->
+        (+ @ a_aSI
+           $dNum_a2af
+           c0_XxT
+           (fromInteger @ a_aSI $dNum_a2af lvl_s2d3),
+         c1_XxV);
+      True ->
+        (c0_XxT,
+         + @ t_aSm
+           $dNum_a2ag
+           c1_XxV
+           (fromInteger @ t_aSm $dNum_a2ag lvl_s2d4))
+    }
+    }
+    }
+
+-- RHS size: {terms: 31, types: 43, coercions: 0}
+f :: forall a_a2b5 t_a2b6 a_a2b7.
+     (Num a_a2b7, Num t_a2b6, Integral a_a2b5) =>
+     [a_a2b5] -> (a_a2b7, t_a2b6) -> (a_a2b7, t_a2b6)
+[LclIdX,
+ Arity=5,
+ Str=DmdType <L,U(C(C1(U)),A,A,A,A,A,C(U))><L,U(C(C1(U)),A,A,A,A,A,C(U))><L,U(U,A,A,C(C1(U)),A,A,A,A,A)><S,1*U><S,1*U(U,U)>m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=IF_ARGS [0 0 0 0 0] 190 0}]
+f =
+  \ (@ a_a2b5)
+    (@ t_a2b6)
+    (@ a_a2b7)
+    ($dNum_a2bd [Dmd=<L,U(C(C1(U)),A,A,A,A,A,C(U))>] :: Num a_a2b7)
+    ($dNum_a2be [Dmd=<L,U(C(C1(U)),A,A,A,A,A,C(U))>] :: Num t_a2b6)
+    ($dIntegral_a2bf [Dmd=<L,U(U,A,A,C(C1(U)),A,A,A,A,A)>]
+       :: Integral a_a2b5)
+    (eta_B2 [Dmd=<S,1*U>] :: [a_a2b5])
+    (eta_B1 [Dmd=<S,1*U(U,U)>] :: (a_a2b7, t_a2b6)) ->
+    letrec {
+      f_s2d1 [Occ=LoopBreaker]
+        :: [a_a2b5] -> (a_a2b7, t_a2b6) -> (a_a2b7, t_a2b6)
+      [LclId,
+       Arity=2,
+       CallArity=2,
+       Str=DmdType <S,1*U><S,1*U(U,U)>m,
+       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True, ConLike=True,
+               WorkFree=True, Expandable=True, Guidance=IF_ARGS [30 20] 130 0}]
+      f_s2d1 =
+        \ (ds_d2c5 [Dmd=<S,1*U>] :: [a_a2b5])
+          (c_aqo [Dmd=<S,1*U(U,U)>] :: (a_a2b7, t_a2b6)) ->
+          case ds_d2c5 of _ [Occ=Dead, Dmd=<L,A>] {
+            [] -> c_aqo;
+            : ipv_s2cI ipv_s2cN [Dmd=<S,1*U>] ->
+              case c_aqo
+              of _ [Occ=Dead, Dmd=<L,A>]
+              { (ipv_s2cQ [Dmd=<S,1*U>], ipv_s2cR [Dmd=<S,1*U>]) ->
+              f_s2d1
+                ipv_s2cN
+                (tick
+                   @ a_a2b5
+                   @ t_a2b6
+                   @ a_a2b7
+                   $dNum_a2bd
+                   $dNum_a2be
+                   $dIntegral_a2bf
+                   ipv_s2cI
+                   ipv_s2cQ
+                   ipv_s2cR)
+              }
+          }; } in
+    f_s2d1 eta_B2 eta_B1
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s1L6 :: GHC.Types.TrName
+$trModule_s2cT :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s1L6 = GHC.Types.TrNameS "main"#
+$trModule_s2cT = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s1L7 :: GHC.Types.TrName
+$trModule_s2cU :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s1L7 = GHC.Types.TrNameS "Dum"#
+$trModule_s2cU = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -27,33 +141,6 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_s1L6 $trModule_s1L7
-
-Rec {
--- RHS size: {terms: 23, types: 7, coercions: 0}
-fib [Occ=LoopBreaker] :: Int -> Integer -> Integer -> Integer
-[LclIdX,
- Arity=3,
- Str=DmdType <S(S),1*U(1*U)><L,1*U><S,1*U>,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 0 20] 121 0}]
-fib =
-  \ (ds_d1KX [Dmd=<S(S),1*U(1*U)>] :: Int)
-    (ds_d1KY [Dmd=<L,1*U>] :: Integer)
-    (b_aGO [Dmd=<S,1*U>] :: Integer) ->
-    case ds_d1KX
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# ds_d1L1 [Dmd=<S,1*U>] ->
-    case ds_d1L1 of ds_X1L9 {
-      __DEFAULT ->
-        case b_aGO of b_XGV [Dmd=<S,U>] { __DEFAULT ->
-        fib
-          (GHC.Types.I# (GHC.Prim.-# ds_X1L9 1#))
-          b_XGV
-          (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger ds_d1KY b_XGV)
-        };
-      0# -> b_aGO
-    }
-    }
-end Rec }
+Dum.$trModule = GHC.Types.Module $trModule_s2cT $trModule_s2cU
 
 

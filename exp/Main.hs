@@ -41,7 +41,6 @@ main = do
   print $ length sfbs
   print $ zip (map prettyPrint sfbs) (map prettyPrint sbs)
 
-
 mentions :: Pat -> String -> Bool
 mentions (PVar n) b = n == Ident b
 mentions (PBangPat (PVar n)) b = n == Ident b
