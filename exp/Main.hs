@@ -28,9 +28,12 @@ main = do
   print $ map prettyPrint bs
   let sbs = safePats bs res
   print $ map prettyPrint sbs
+  -- let sbs = map (PVar . Ident) ["a", "b", "c", "d"]
   let (safed, safebangs) = markSafePats sbs parres
   print $ map prettyPrint safebangs
   putStrLn $ prettyPrint safed
+  let sfbs = binders safed
+  print $ map prettyPrint sfbs
 
 
 mentions :: Pat -> String -> Bool
@@ -54,14 +57,15 @@ safePats = foldl (\ps (DP.Annot b a) ->
 markSafePats :: [Pat] -> Module -> (Module, [Pat])
 markSafePats sps x = runState (transformBiM go x) sps
   where go :: (MonadState [Pat] m) => Pat -> m Pat
-        -- go pb@(PBangPat _) = do
-        go pb = do
+        go pb@(PBangPat pv) = do
+        -- go pb = do
           (p:ps) <- get
           put ps
           case p
-            of (PAsPat (Ident "safebang") _) -> return (PAsPat (Ident "safebang") pb)
+            of (PAsPat (Ident "safebang") _) -> return pb
+               (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
                _ -> return pb
-        -- go px = return px
+        go px = return px
 
 binders :: Module -> [Pat]
 binders = universeBi

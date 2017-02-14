@@ -1,6 +1,6 @@
 
 ==================== Renamer ====================
 Dum.u = 0 : Dum.go (head Dum.u) (tail Dum.u)
-Dum.go !a_aBl as_aBm
-  = a_aBl + 1 : Dum.go (head as_aBm) (tail as_aBm)
+Dum.go !a_aBj as_aBk
+  = a_aBj + 1 : Dum.go (head as_aBk) (tail as_aBk)
 
