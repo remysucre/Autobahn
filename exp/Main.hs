@@ -4,6 +4,7 @@ import Debug.Trace
 import qualified DmdParser as DP
 import Preprocess
 
+import System.Environment
 import System.Process
 import Language.Haskell.Exts
 import Data.Generics.Uniplate.Data
@@ -11,13 +12,17 @@ import Control.Monad.State.Strict
 
 main :: IO ()
 main = do
+  [fn] <- getArgs
+  parOrig <- par fn
+  let mainStripped = dropMain $ renameModule parOrig defaultModuleName
+  writeFile "Dum.hs" (prettyPrint mainStripped)
   _ <- system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
   fcd <- dumprn2hs "Dum"
   -- putStr fcd
   writeFile "Dumrn.hs" fcd
 
   !fc <- readFile "Dum.dump-stranal"
-  -- let res0 = DP.parse DP.stranal "src" "[asdf [Dmd=<S,A>]]"
+  -- let res0 = DP.parse DP.stranalinvestigate "src" "[asdf [Dmd=<S,A>]]"
   let Right res = DP.parse DP.stranal "src" fc
   -- -- let res1 = parse remany "as" "[a]"
   -- -- print res1
@@ -103,3 +108,19 @@ par path = do
   case pres of
        ParseOk res -> return res
        ParseFailed srcloc e -> error $ show srcloc ++ e
+
+{- Stripping Main Modules -}
+
+defaultModuleName :: ModuleName
+defaultModuleName = ModuleName "Dum"
+
+renameModule :: Module -> ModuleName -> Module
+renameModule (Module a _ b c _ d e) mn =
+  Module a mn (LanguagePragma (SrcLoc "nothing" 1 1) [Ident "BangPatterns"] : b) c Nothing d e
+
+dropMain :: Module -> Module
+dropMain (Module a b c d e f decls) = Module a b c d e f decls'
+  where decls' = filter (not . isMain)decls
+        isMain (TypeSig _ [Ident "main"] _ )= True
+        isMain (PatBind _ (PVar (Ident "main")) _ _) = True
+        isMain _ = False
