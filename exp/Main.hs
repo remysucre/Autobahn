@@ -25,6 +25,7 @@ main = do
   parres <- par "/Users/rem/Autobahn/exp/Dumrn.hs"
   let bs = binders parres
   let sbs = safePats bs res
+  print $ map prettyPrint sbs
   let (safed, _) = markSafePats sbs parres
   putStrLn $ prettyPrint safed
 

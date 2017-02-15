@@ -1,0 +1,50 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["minN","s_aPi","n_aPj","t_aPk","d_aPl","m_aPm","s_a1Ma","rest_a1Mb","n_aPn","d_a1TO","0","t_a1TP","d_a1TQ","i_a1TR","t_a1TS","a_a1TT","b_a1TU","ans_a1TV","check","b_a1TW","safebang@!b_a1TW","z_a1TX","safebang@!z_a1TX","Nil","b_a1TY","z_a1TZ","i_a1U0","l_a1U1","r_a1U2","Node i_a1U0 l_a1U1 r_a1U2","(Node i_a1U0 l_a1U1 r_a1U2)","i_a1U3","0","i_a1U4","d_a1U5","i2_a1U6","d2_a1U7"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+import Control.Monad
+import System.Mem
+import Data.Bits
+import Text.Printf
+import GHC.Conc
+minN = 4
+io s_aPi n_aPj t_aPk
+  = printf "%s of depth %d\t check: %d\n" s_aPi n_aPj t_aPk
+
+depth :: Int -> Int -> [(Int, Int, Int)]
+depth d_aPl m_aPm
+  | d_aPl <= m_aPm =
+    let s_a1Ma = sumT d_aPl n_aPn 0
+        rest_a1Mb = depth (d_aPl + 2) m_aPm
+      in s_a1Ma `par` ((2 * n_aPn, d_aPl, s_a1Ma) : rest_a1Mb)
+  | otherwise = []
+  where n_aPn = bit (m_aPm - d_aPl + minN)
+
+sumT :: Int -> Int -> Int -> Int
+sumT d_a1TO 0 t_a1TP = t_a1TP
+sumT d_a1TQ i_a1TR t_a1TS
+  = a_a1TT `par` b_a1TU `par` sumT d_a1TQ (i_a1TR - 1) ans_a1TV
+  where a_a1TT = check (make i_a1TR d_a1TQ)
+        b_a1TU = check (make (-i_a1TR) d_a1TQ)
+        ans_a1TV = a_a1TT + b_a1TU + t_a1TS
+check = check' True 0
+
+check' :: Bool -> Int -> Tree -> Int
+check' !b_a1TW !z_a1TX Nil = z_a1TX
+check' b_a1TY z_a1TZ (Node i_a1U0 l_a1U1 r_a1U2)
+  = check' (not b_a1TY)
+      (check' b_a1TY
+         (if b_a1TY then z_a1TZ + i_a1U0 else z_a1TZ - i_a1U0)
+         l_a1U1)
+      r_a1U2
+
+make :: Int -> Int -> Tree
+make i_a1U3 0 = Node i_a1U3 Nil Nil
+make i_a1U4 d_a1U5
+  = Node i_a1U4 (make (i2_a1U6 - 1) d2_a1U7) (make i2_a1U6 d2_a1U7)
+  where i2_a1U6 = 2 * i_a1U4
+        d2_a1U7 = d_a1U5 - 1
+
+data Tree = Nil
+          | Node !Int !Tree !Tree

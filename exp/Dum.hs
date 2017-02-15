@@ -1,8 +1,28 @@
 {-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE BangPatterns #-}
 module Dum where
-f [] (!c) = c
-f (!((!(x : xs)))) (!c) = f xs (uncurry (tick x) c)
-tick x (!c0) (!c1)
-  | even x = (c0, c1 + 1)
-  | otherwise = (c0 + 1, c1)
+import Data.Ratio
+import System.Environment
+
+powers :: [[Integer]]
+powers = [2 ..] : map (zipWith (*) (head powers)) powers
+
+neg_powers :: [[Integer]]
+neg_powers
+  = map (zipWith (\ n x -> if n then x else -x) (iterate not True))
+      powers
+
+pascal :: [[Integer]]
+pascal
+  = [1, 2, 1] :
+      map (\ line -> zipWith (+) (line ++ [0]) (0 : line)) pascal
+bernoulli 0 = 1
+bernoulli 1 = -(1 % 2)
+bernoulli n | odd n = 0
+bernoulli n
+  = (-1) % 2 +
+      sum
+        [fromIntegral
+           ((sum $ zipWith (*) powers (tail $ tail combs)) - fromIntegral k)
+           % fromIntegral (k + 1)
+         | (k, combs) <- zip [2 .. n] pascal]
+  where powers = (neg_powers !! (n - 1))
