@@ -1,4 +1,5 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE BangPatterns #-}
 module Dum where
 f [] (!c) = c
 f (!((!(x : xs)))) (!c) = f xs (uncurry (tick x) c)

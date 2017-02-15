@@ -1,5 +1,5 @@
 {-# LANGUAGE BangPatterns, FlexibleContexts #-}
-import Debug.Trace
+-- import Debug.Trace
 
 import qualified DmdParser as DP
 import Preprocess
@@ -18,33 +18,15 @@ main = do
   writeFile "Dum.hs" (prettyPrint mainStripped)
   _ <- system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
   fcd <- dumprn2hs "Dum"
-  -- putStr fcd
   writeFile "Dumrn.hs" fcd
 
   !fc <- readFile "Dum.dump-stranal"
-  -- let res0 = DP.parse DP.stranalinvestigate "src" "[asdf [Dmd=<S,A>]]"
   let Right res = DP.parse DP.stranal "src" fc
-  -- -- let res1 = parse remany "as" "[a]"
-  -- -- print res1
-  -- print res0
-  print res
   parres <- par "/Users/rem/Autobahn/exp/Dumrn.hs"
-  putStrLn $ prettyPrint parres
   let bs = binders parres
-  print $ map prettyPrint bs
   let sbs = safePats bs res
-  print $ map prettyPrint sbs
-  print sbs
-  print $ length sbs
-  -- let sbs = map (PVar . Ident) ["a", "b", "c", "d"]
-  print "ABOUT TO MARK"
-  let (safed, safebangs) = markSafePats sbs parres
-  putStrLn $ "safed bangs" ++ show (map prettyPrint safebangs)
+  let (safed, _) = markSafePats sbs parres
   putStrLn $ prettyPrint safed
-  let sfbs = binders safed
-  print $ map prettyPrint sfbs
-  print $ length sfbs
-  print $ zip (map prettyPrint sfbs) (map prettyPrint sbs)
 
 mentions :: Pat -> String -> Bool
 mentions (PVar n) b = n == Ident b
@@ -70,16 +52,16 @@ markSafePats sps x = runState (transformBiM go x) sps
   where go :: (MonadState [Pat] m) => Pat -> m Pat
         go pb@(PBangPat pv) = do
           (p:ps) <- get
-          trace ("bang " ++ show pb ++ "," ++ show p) (put ps)
+          put ps
           case p
             of (PAsPat (Ident "safebang") _) -> return pb
                (PAsPat (Ident "remove") _) -> return (PAsPat (Ident "removed") pv)
                -- (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
                _ -> return (PAsPat (Ident "investigate") pv)
         go px = do
-          (p:ps) <- get
-          -- put ps
-          trace ("NOT bang " ++ show px ++ "," ++ show p) (put ps)
+          (_:ps) <- get
+          put ps
+          -- trace ("NOT bang " ++ show px ++ "," ++ show p) (put ps)
           return px
 
 binders :: Module -> [Pat]

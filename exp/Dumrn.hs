@@ -1,9 +1,10 @@
 {-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE BangPatterns #-}
 module Dum where
-f [] (!c_aqo) = c_aqo
-f (!((!(x_aqp : xs_aqq)))) (!c_axv)
-  = f xs_aqq (uncurry (tick x_aqp) c_axv)
-tick x_axI (!c0_axJ) (!c1_axK)
-  | even x_axI = (c0_axJ, c1_axK + 1)
-  | otherwise = (c0_axJ + 1, c1_axK)
+f [] (!c_aql) = c_aql
+f (!((!(x_aqm : xs_aqn)))) (!c_axs)
+  = f xs_aqn (uncurry (tick x_aqm) c_axs)
+tick x_axF (!c0_axG) (!c1_axH)
+  | even x_axF = (c0_axG, c1_axH + 1)
+  | otherwise = (c0_axG + 1, c1_axH)
 
