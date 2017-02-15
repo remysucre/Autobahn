@@ -1,0 +1,26 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["Z","x_a1GC","S x_a1GC","(S x_a1GC)","x_a1GD","Z","x_a1GE","!x_a1GE","(!x_a1GE)","y_a1GF","!y_a1GF","(!y_a1GF)","S (!y_a1GF)","(S (!y_a1GF))","Z","!Z","(!Z)","y_a1GG","x_a1GH","safebang@!x_a1GH","(!x_a1GH)","S (!x_a1GH)","(S (!x_a1GH))","y_a1GI","x_a1GJ","safebang@!x_a1GJ","(!x_a1GJ)","Z","!Z","(!Z)","x_a1GK","!x_a1GK","(!x_a1GK)","y_a1GL","safebang@!y_a1GL","(!y_a1GL)","S (!y_a1GL)","(S (!y_a1GL))","x_a1GM"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+infix 8 ^^^
+
+int :: Nat -> Int
+int Z = 0
+int (S x_a1GC) = 1 + int x_a1GC
+x_a1GD ^^^ Z = S Z
+(investigate@x_a1GE) ^^^ (S (investigate@y_a1GF))
+  = x_a1GE * (x_a1GE ^^^ y_a1GF)
+
+data Nat = Z
+         | S Nat
+         deriving (Eq, Ord, Show)
+
+instance Num Nat where
+        (investigate@Z) + y_a1GG = y_a1GG
+        (S (!x_a1GH)) + y_a1GI = S (x_a1GH + y_a1GI)
+        (!x_a1GJ) * (investigate@Z) = Z
+        (investigate@x_a1GK) * (S (!y_a1GL)) = x_a1GK * y_a1GL + x_a1GK
+        fromInteger x_a1GM
+          = if x_a1GM < 1 then Z else S (fromInteger (x_a1GM - 1))

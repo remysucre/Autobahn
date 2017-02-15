@@ -1,0 +1,18 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["nq_as0","x_az7","d_az8","[]","![]","(![])","x_az9","!x_az9","(!x_az9)","d_aza","q_azb","!q_azb","(!q_azb)","l_azc","(!q_azb) : l_azc","((!q_azb) : l_azc)","0","n_a1w7","b_a1w8","q_a1w9"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+nsoln nq_as0 = length (gen_as2 nq_as0)
+  where safe_as1 :: Int -> Int -> [Int] -> Bool
+        safe_as1 x_az7 d_az8 (investigate@[]) = True
+        safe_as1 (investigate@x_az9) d_aza ((investigate@q_azb) : l_azc)
+          = x_az9 /= q_azb && x_az9 /= q_azb + d_aza && x_az9 /= q_azb -
+              d_aza
+              && safe_as1 x_az9 (d_aza + 1) l_azc
+        
+        gen_as2 :: Int -> [[Int]]
+        gen_as2 0 = [[]]
+        gen_as2 n_a1w7
+          = [(q_a1w9 : b_a1w8) | b_a1w8 <- gen_as2 (n_a1w7 - 1),
+             q_a1w9 <- [1 .. nq_as0], safe_as1 q_a1w9 1 b_a1w8]

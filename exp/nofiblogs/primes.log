@@ -1,0 +1,18 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["x_az9","n_aAm","!n_aAm","(!n_aAm)","x_aAn","safebang@!x_aAn","(!x_aAn)","n_a1FJ","ns_a1FK","safebang@!ns_a1FK","(!ns_a1FK)","n_a1FJ : (!ns_a1FK)","(n_a1FJ : (!ns_a1FK))","!(n_a1FJ : (!ns_a1FK))","(!(n_a1FJ : (!ns_a1FK)))","primes"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+suCC :: Int -> Int
+suCC x_az9 = x_az9 + 1
+
+isdivs :: Int -> Int -> Bool
+isdivs (investigate@n_aAm) (!x_aAn) = mod x_aAn n_aAm /= 0
+
+the_filter :: [Int] -> [Int]
+the_filter (investigate@(n_a1FJ : (!ns_a1FK)))
+  = filter (isdivs n_a1FJ) ns_a1FK
+
+primes :: [Int]
+primes = map head (iterate the_filter (iterate suCC 2))

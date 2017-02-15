@@ -1,0 +1,11 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["x_az0","!x_az0","(!x_az0)","y_az1","z_az2","safebang@!z_az2","(!z_az2)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+tak :: Int -> Int -> Int -> Int
+tak (investigate@x_az0) y_az1 (!z_az2)
+  = if not (y_az1 < x_az0) then z_az2 else
+      tak (tak (x_az0 - 1) y_az1 z_az2) (tak (y_az1 - 1) z_az2 x_az0)
+        (tak (z_az2 - 1) x_az0 y_az1)

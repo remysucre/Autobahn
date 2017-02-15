@@ -1,0 +1,45 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["l_ayM","safebang@!l_ayM","(!l_ayM)","[]","![]","(![])","'<'","x_aRD","!x_aRD","(!x_aRD)","'<' : (!x_aRD)","('<' : (!x_aRD))","!('<' : (!x_aRD))","(!('<' : (!x_aRD)))","((!('<' : (!x_aRD))))","!((!('<' : (!x_aRD))))","(!((!('<' : (!x_aRD)))))","'['","!'['","(!'[')","x_aRE","(!'[') : x_aRE","((!'[') : x_aRE)","x_aRF","!x_aRF","(!x_aRF)","c_aRG","rest_aRH","c_aRG : rest_aRH","(c_aRG : rest_aRH)","!(c_aRG : rest_aRH)","(!(c_aRG : rest_aRH))","((!(c_aRG : rest_aRH)))","!((!(c_aRG : rest_aRH)))","(!((!(c_aRG : rest_aRH))))","z_aRI","a_aRJ","'-'","b_aRK","!b_aRK","(!b_aRK)","']'","!']'","(!']')","rest_aRL","(!']') : rest_aRL","((!']') : rest_aRL)","!((!']') : rest_aRL)","(!((!']') : rest_aRL))","(!b_aRK) : (!((!']') : rest_aRL))","((!b_aRK) : (!((!']') : rest_aRL)))","'-' : ((!b_aRK) : (!((!']') : rest_aRL)))","('-' : ((!b_aRK) : (!((!']') : rest_aRL))))","a_aRJ : ('-' : ((!b_aRK) : (!((!']') : rest_aRL))))","(a_aRJ : ('-' : ((!b_aRK) : (!((!']') : rest_aRL)))))","!(a_aRJ : ('-' : ((!b_aRK) : (!((!']') : rest_aRL)))))","(!(a_aRJ : ('-' : ((!b_aRK) : (!((!']') : rest_aRL))))))","c_a1Nv","!c_a1Nv","(!c_a1Nv)","z_a1Nw","!z_a1Nw","(!z_a1Nw)","c_a1Rd","z_a1Re","x_a1Rf","i_a22M","!i_a22M","(!i_a22M)","z_a22N","!z_a22N","(!z_a22N)","p_a1Rg","_","q_a1Rh","_ : q_a1Rh","(p_a1Rg, _ : q_a1Rh)","r_a1Ri","!r_a1Ri","(!r_a1Ri)","_","s_a1Rj","!s_a1Rj","(!s_a1Rj)","_ : (!s_a1Rj)","((!r_a1Ri), _ : (!s_a1Rj))","u_a1Rk","!u_a1Rk","(!u_a1Rk)","v_a1Rl","!v_a1Rl","(!v_a1Rl)","((!u_a1Rk), (!v_a1Rl))","s_a1Rp","!s_a1Rp","(!s_a1Rp)","u_a1Rq","!u_a1Rq","(!u_a1Rq)","c_a1Rr","s_a1SE","i_a1SF","width_a1Ro"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import Data.Char
+
+numchars :: [String] -> Int
+numchars (!l_ayM) = sum $ map length l_ayM
+expand (investigate@[]) = [""]
+expand (investigate@((investigate@('<' : (investigate@x_aRD)))))
+  = numericRule x_aRD
+expand ((investigate@'[') : x_aRE) = alphabeticRule x_aRE
+expand (investigate@x_aRF) = constantRule x_aRF
+constantRule (investigate@((investigate@(c_aRG : rest_aRH))))
+  = [c_aRG : z_aRI | z_aRI <- expand rest_aRH]
+alphabeticRule
+  (investigate@(a_aRJ :
+                  ('-' :
+                     ((investigate@b_aRK) :
+                        (investigate@((investigate@']') : rest_aRL))))))
+  | a_aRJ <= b_aRK =
+    [c_a1Nv : z_a1Nw | (investigate@c_a1Nv) <- [a_aRJ .. b_aRK],
+     (investigate@z_a1Nw) <- expand rest_aRL]
+  | otherwise =
+    [c_a1Rd : z_a1Re | c_a1Rd <- reverse [b_aRK .. a_aRJ],
+     z_a1Re <- expand rest_aRL]
+numericRule x_a1Rf
+  = [pad_a1Rn (show i_a22M) ++ z_a22N |
+     (investigate@i_a22M) <- if u_a1Rk < v_a1Rl then [u_a1Rk .. v_a1Rl]
+                               else [u_a1Rk, u_a1Rk - 1 .. v_a1Rl],
+     (investigate@z_a22N) <- expand s_a1Rj]
+  where (p_a1Rg, _ : q_a1Rh) = span (/= '-') x_a1Rf
+        ((investigate@r_a1Ri), _ : (investigate@s_a1Rj))
+          = span (/= '>') q_a1Rh
+        ((investigate@u_a1Rk), (investigate@v_a1Rl))
+          = (mknum_a1Rm p_a1Rg, mknum_a1Rm r_a1Ri)
+        mknum_a1Rm (investigate@s_a1Rp)
+          = foldl
+              (\ (investigate@u_a1Rq) c_a1Rr ->
+                 u_a1Rq * 10 + (ord c_a1Rr - ord '0'))
+              0
+              s_a1Rp
+        pad_a1Rn s_a1SE
+          = ['0' | i_a1SF <- [1 .. (width_a1Ro - (length s_a1SE))]] ++ s_a1SE
+        width_a1Ro = max (length (show u_a1Rk)) (length (show v_a1Rl))

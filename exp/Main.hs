@@ -22,7 +22,8 @@ main = do
 
   !fc <- readFile "Dum.dump-stranal"
   let Right res = DP.parse DP.stranal "src" fc
-  parres <- par "/Users/rem/Autobahn/exp/Dumrn.hs"
+  home <- getEnv "HOME"
+  parres <- par $  home ++ "/Autobahn/exp/Dumrn.hs"
   let bs = binders parres
   let sbs = safePats bs res
   print $ map prettyPrint sbs

@@ -1,0 +1,33 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["l_azp","!l_azp","(!l_azp)","u_azq","f_azr","safebang@!f_azr","(!f_azr)","d_azs","!d_azs","(!d_azs)","l1_a13a","u1_a13b","l2_a13c","!l2_a13c","(!l2_a13c)","u2_a13d","!u2_a13d","(!u2_a13d)","f_a13e","y_a13f","safebang@!y_a13f","(!y_a13f)","x_a13g","u_a13h","v_a13i","x_a13j","y_a13k","ints","zarks","rtotals","n_a16Z","is","itotals","n_a170","!n_a170","(!n_a170)","es","n_a171","!n_a171","(!n_a171)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+integrate1D :: Double -> Double -> (Double -> Double) -> Double
+integrate1D (investigate@l_azp) u_azq (!f_azr)
+  = let (investigate@d_azs) = (u_azq - l_azp) / 8.0 in
+      d_azs *
+        sum
+          [(f_azr l_azp) * 0.5, f_azr (l_azp + d_azs),
+           f_azr (l_azp + (2.0 * d_azs)), f_azr (l_azp + (3.0 * d_azs)),
+           f_azr (l_azp + (4.0 * d_azs)), f_azr (u_azq - (3.0 * d_azs)),
+           f_azr (u_azq - (2.0 * d_azs)), f_azr (u_azq - d_azs),
+           (f_azr u_azq) * 0.5]
+integrate2D l1_a13a u1_a13b (investigate@l2_a13c)
+  (investigate@u2_a13d) f_a13e
+  = integrate1D l2_a13c u2_a13d
+      (\ (!y_a13f) ->
+         integrate1D l1_a13a u1_a13b (\ x_a13g -> f_a13e x_a13g y_a13f))
+zark u_a13h v_a13i
+  = integrate2D 0.0 u_a13h 0.0 v_a13i
+      (\ x_a13j -> (\ y_a13k -> x_a13j * y_a13k))
+ints = [1.0 ..] :: [Double]
+zarks = zipWith zark ints (map (2.0 *) ints)
+rtotals = head zarks : zipWith (+) (tail zarks) rtotals
+rtotal n_a16Z = rtotals !! n_a16Z
+is = map (^ 4) ints
+itotals = head is : zipWith (+) (tail is) itotals
+itotal (investigate@n_a170) = itotals !! n_a170
+es = map (^ 2) (zipWith (-) rtotals itotals)
+etotal (investigate@n_a171) = sum (take n_a171 es)

@@ -1,0 +1,35 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["primes","s_azi","ns_azj","Wheel s_azi ns_azj","ws_azk","Wheel s_azi ns_azj : ws_azk","(Wheel s_azi ns_azj : ws_azk)","!(Wheel s_azi ns_azj : ws_azk)","(!(Wheel s_azi ns_azj : ws_azk))","ps_azl","qs_azm","o_a1A8","!o_a1A8","(!o_a1A8)","n_a1A9","n'_a1Aa","!n'_a1Aa","(!n'_a1Aa)","noFactor_azn","!noFactor_azn","(!noFactor_azn)","p_a1Ab","ps_a1Ac","p_a1Ab : ps_a1Ac","(p_a1Ab : ps_a1Ac)","q_a1Ad","safebang@!q_a1Ad","(!q_a1Ad)","qs_a1Ae","(!q_a1Ad) : qs_a1Ae","((!q_a1Ad) : qs_a1Ae)","n_a1Af","safebang@!n_a1Af","(!n_a1Af)","squares","p_a1JT","!p_a1JT","(!p_a1JT)","wheels","s_a1JU","ns_a1JV","Wheel s_a1JU ns_a1JV","(Wheel s_a1JU ns_a1JV)","!(Wheel s_a1JU ns_a1JV)","(!(Wheel s_a1JU ns_a1JV))","p_a1JW","!p_a1JW","(!p_a1JW)","ns'_a1JX","!ns'_a1JX","(!ns'_a1JX)","o_a1JY","n_a1JZ","!n_a1JZ","(!n_a1JZ)","n'_a1K0","!n'_a1K0","(!n'_a1K0)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+primes :: [Int]
+primes = sieve wheels primes squares
+sieve (investigate@(Wheel s_azi ns_azj : ws_azk)) ps_azl qs_azm
+  = [n'_a1Aa |
+     (investigate@o_a1A8) <- s_azi :
+                               [s_azi * 2, s_azi * 3 .. (head ps_azl - 1) * s_azi],
+     n_a1A9 <- ns_azj, (investigate@n'_a1Aa) <- [n_a1A9 + o_a1A8],
+     noFactor_azn n'_a1Aa]
+      ++ sieve ws_azk (tail ps_azl) (tail qs_azm)
+  where (investigate@noFactor_azn)
+          = if s_azi <= 2 then const True else notDivBy ps_azl qs_azm
+notDivBy (p_a1Ab : ps_a1Ac) ((!q_a1Ad) : qs_a1Ae) (!n_a1Af)
+  = q_a1Ad > n_a1Af || n_a1Af `mod` p_a1Ab > 0 &&
+      notDivBy ps_a1Ac qs_a1Ae n_a1Af
+
+squares :: [Int]
+squares = [p_a1JT * p_a1JT | (investigate@p_a1JT) <- primes]
+
+wheels :: [Wheel]
+wheels = Wheel 1 [1] : zipWith nextSize wheels primes
+nextSize (investigate@(Wheel s_a1JU ns_a1JV)) (investigate@p_a1JW)
+  = Wheel (s_a1JU * p_a1JW) ns'_a1JX
+  where (investigate@ns'_a1JX)
+          = [n'_a1K0 | o_a1JY <- [0, s_a1JU .. (p_a1JW - 1) * s_a1JU],
+             (investigate@n_a1JZ) <- ns_a1JV,
+             (investigate@n'_a1K0) <- [n_a1JZ + o_a1JY],
+             n'_a1K0 `mod` p_a1JW > 0]
+
+data Wheel = Wheel Int [Int]

@@ -1,0 +1,41 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["powers","neg_powers","n_aNI","investigate@!n_aNI","(!n_aNI)","x_aNJ","!x_aNJ","(!x_aNJ)","pascal","line_a1Jr","!line_a1Jr","(!line_a1Jr)","0","1","n_a1T0","n_a1T1","k_a2bI","!k_a2bI","(!k_a2bI)","combs_a2bJ","((!k_a2bI), combs_a2bJ)","!((!k_a2bI), combs_a2bJ)","(!((!k_a2bI), combs_a2bJ))","powers_a1T2","!powers_a1T2","(!powers_a1T2)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import Data.Ratio
+import System.Environment
+
+powers :: [[Integer]]
+powers = [2 ..] : map (zipWith (*) (head powers)) powers
+
+neg_powers :: [[Integer]]
+neg_powers
+  = map
+      (zipWith
+         (\ (investigate@n_aNI) (investigate@x_aNJ) ->
+            if n_aNI then x_aNJ else -x_aNJ)
+         (iterate not True))
+      powers
+
+pascal :: [[Integer]]
+pascal
+  = [1, 2, 1] :
+      map
+        (\ (investigate@line_a1Jr) ->
+           zipWith (+) (line_a1Jr ++ [0]) (0 : line_a1Jr))
+        pascal
+bernoulli 0 = 1
+bernoulli 1 = -(1 % 2)
+bernoulli n_a1T0 | odd n_a1T0 = 0
+bernoulli n_a1T1
+  = (-1) % 2 +
+      sum
+        [fromIntegral
+           ((sum $ zipWith (*) powers_a1T2 (tail $ tail combs_a2bJ)) -
+              fromIntegral k_a2bI)
+           % fromIntegral (k_a2bI + 1)
+         |
+         (investigate@((investigate@k_a2bI), combs_a2bJ)) <- zip
+                                                               [2 .. n_a1T1]
+                                                               pascal]
+  where (investigate@powers_a1T2) = (neg_powers !! (n_a1T1 - 1))

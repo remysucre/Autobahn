@@ -1,0 +1,100 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["m_aJx","i_aTc","!i_aTc","(!i_aTc)","j_aUl","k_aUm","!k_aUm","(!k_aUm)","[]","![]","(![])","r_aUn","rs_aUo","safebang@!rs_aUo","(!rs_aUo)","r_aUn : (!rs_aUo)","(r_aUn : (!rs_aUo))","!(r_aUn : (!rs_aUo))","(!(r_aUn : (!rs_aUo)))","((!(r_aUn : (!rs_aUo))))","n_aUp","radicals_aUq","j_aUr","!j_aUr","(!j_aUr)","radicals_aUs","n_aUt","i_aUu","!i_aUu","(!i_aUu)","j_aUv","k_aUw","safebang@!k_aUw","(!k_aUw)","((!i_aUu), j_aUv, (!k_aUw))","!((!i_aUu), j_aUv, (!k_aUw))","(!((!i_aUu), j_aUv, (!k_aUw)))","ri_aUx","safebang@!ri_aUx","(!ri_aUx)","ris_aUy","safebang@!ris_aUy","(!ris_aUy)","(!ri_aUx) : (!ris_aUy)","((!ri_aUx) : (!ris_aUy))","!((!ri_aUx) : (!ris_aUy))","(!((!ri_aUx) : (!ris_aUy)))","((!((!ri_aUx) : (!ris_aUy))))","!((!((!ri_aUx) : (!ris_aUy))))","(!((!((!ri_aUx) : (!ris_aUy)))))","rj_a1PI","safebang@!rj_a1PI","(!rj_a1PI)","rjs_a1PJ","safebang@!rjs_a1PJ","(!rjs_a1PJ)","(!rj_a1PI) : (!rjs_a1PJ)","((!rj_a1PI) : (!rjs_a1PJ))","!((!rj_a1PI) : (!rjs_a1PJ))","(!((!rj_a1PI) : (!rjs_a1PJ)))","((!((!rj_a1PI) : (!rjs_a1PJ))))","rk_a1PK","!rk_a1PK","(!rk_a1PK)","radicals_a1PL","n_a1PM","r1_a1PN","safebang@!r1_a1PN","(!r1_a1PN)","r1s_a1PO","(!r1_a1PN) : r1s_a1PO","((!r1_a1PN) : r1s_a1PO)","!((!r1_a1PN) : r1s_a1PO)","(!((!r1_a1PN) : r1s_a1PO))","((!((!r1_a1PN) : r1s_a1PO)))","!((!((!r1_a1PN) : r1s_a1PO)))","(!((!((!r1_a1PN) : r1s_a1PO))))","r2_a1PP","m_a1PQ","i_a1PR","j_a1PS","!j_a1PS","(!j_a1PS)","k_a1PT","!k_a1PT","(!k_a1PT)","l_a1PU","radicals_a1PV","n_a1PW","i_a1PX","!i_a1PX","(!i_a1PX)","j_a1PY","k_a1PZ","l_a1Q0","((!i_a1PX), j_a1PY, k_a1PZ, l_a1Q0)","!((!i_a1PX), j_a1PY, k_a1PZ, l_a1Q0)","(!((!i_a1PX), j_a1PY, k_a1PZ, l_a1Q0))","ri_a1Q1","ris_a1Q2","ri_a1Q1 : ris_a1Q2","(ri_a1Q1 : ris_a1Q2)","!(ri_a1Q1 : ris_a1Q2)","(!(ri_a1Q1 : ris_a1Q2))","((!(ri_a1Q1 : ris_a1Q2)))","!((!(ri_a1Q1 : ris_a1Q2)))","(!((!(ri_a1Q1 : ris_a1Q2))))","rj_a1Q3","rjs_a1Q4","safebang@!rjs_a1Q4","(!rjs_a1Q4)","rj_a1Q3 : (!rjs_a1Q4)","(rj_a1Q3 : (!rjs_a1Q4))","!(rj_a1Q3 : (!rjs_a1Q4))","(!(rj_a1Q3 : (!rjs_a1Q4)))","rk_a1Q5","rks_a1Q6","safebang@!rks_a1Q6","(!rks_a1Q6)","rk_a1Q5 : (!rks_a1Q6)","(rk_a1Q5 : (!rks_a1Q6))","rl_a1Q7","n_a1Q8","j_a1Qa","!j_a1Qa","(!j_a1Qa)","radicals_a1Q9","!radicals_a1Q9","(!radicals_a1Q9)","n_a28S","!n_a28S","(!n_a28S)","j_a28U","radicals_a28T","!radicals_a28T","(!radicals_a28T)","n_a28V","!n_a28V","(!n_a28V)","j_a28X","radicals_a28W","!radicals_a28W","(!radicals_a28W)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import Data.Array
+import System.Environment
+
+three_partitions :: Int -> [(Int, Int, Int)]
+three_partitions m_aJx
+  = [(i_aTc, j_aUl, k_aUm) |
+     (investigate@i_aTc) <- [0 .. (div m_aJx 3)],
+     j_aUl <- [i_aTc .. (div (m_aJx - i_aTc) 2)],
+     (investigate@k_aUm) <- [m_aJx - (i_aTc + j_aUl)]]
+remainders (investigate@[]) = []
+remainders ((investigate@(r_aUn : (!rs_aUo))))
+  = (r_aUn : rs_aUo) : (remainders rs_aUo)
+
+radical_generator :: Int -> Array Int [Radical]
+radical_generator n_aUp = radicals_aUq
+  where radicals_aUq
+          = array (0, n_aUp)
+              ((0, [H]) :
+                 [(j_aUr, rads_of_size_n radicals_aUq j_aUr) |
+                  (investigate@j_aUr) <- [1 .. n_aUp]])
+
+rads_of_size_n :: Array Int [Radical] -> Int -> [Radical]
+rads_of_size_n radicals_aUs n_aUt
+  = [(C ri_aUx rj_a1PI rk_a1PK) |
+     (investigate@((investigate@i_aUu), j_aUv,
+                   (!k_aUw))) <- (three_partitions (n_aUt - 1)),
+     (investigate@((investigate@((!ri_aUx) :
+                                   (!ris_aUy))))) <- (remainders (radicals_aUs ! i_aUu)),
+     ((investigate@((!rj_a1PI) : (!rjs_a1PJ)))) <- (remainders
+                                                      (if (i_aUu == j_aUv) then (ri_aUx : ris_aUy)
+                                                         else radicals_aUs ! j_aUv)),
+     (investigate@rk_a1PK) <- (if (j_aUv == k_aUw) then
+                                 (rj_a1PI : rjs_a1PJ) else radicals_aUs ! k_aUw)]
+
+bcp_generator :: Array Int [Radical] -> Int -> [Paraffin]
+bcp_generator radicals_a1PL n_a1PM
+  = if (odd n_a1PM) then [] else
+      [(BCP r1_a1PN r2_a1PP) |
+       (investigate@((investigate@((!r1_a1PN) :
+                                     r1s_a1PO)))) <- (remainders (radicals_a1PL ! (div n_a1PM 2))),
+       r2_a1PP <- (r1_a1PN : r1s_a1PO)]
+
+four_partitions :: Int -> [(Int, Int, Int, Int)]
+four_partitions m_a1PQ
+  = [(i_a1PR, j_a1PS, k_a1PT, l_a1PU) |
+     i_a1PR <- [0 .. (div m_a1PQ 4)],
+     (investigate@j_a1PS) <- [i_a1PR .. (div (m_a1PQ - i_a1PR) 3)],
+     (investigate@k_a1PT) <- [(max j_a1PS
+                                 (ceiling ((fromIntegral m_a1PQ) / (fromInteger 2)) - i_a1PR -
+                                    j_a1PS))
+                              .. (div (m_a1PQ - i_a1PR - j_a1PS) 2)],
+     l_a1PU <- [(m_a1PQ - (i_a1PR + j_a1PS + k_a1PT))]]
+
+ccp_generator :: Array Int [Radical] -> Int -> [Paraffin]
+ccp_generator radicals_a1PV n_a1PW
+  = [(CCP ri_a1Q1 rj_a1Q3 rk_a1Q5 rl_a1Q7) |
+     (investigate@((investigate@i_a1PX), j_a1PY, k_a1PZ,
+                   l_a1Q0)) <- (four_partitions (n_a1PW - 1)),
+     (investigate@((investigate@(ri_a1Q1 : ris_a1Q2)))) <- (remainders
+                                                              (radicals_a1PV ! i_a1PX)),
+     (investigate@(rj_a1Q3 : (!rjs_a1Q4))) <- (remainders
+                                                 (if (i_a1PX == j_a1PY) then (ri_a1Q1 : ris_a1Q2)
+                                                    else radicals_a1PV ! j_a1PY)),
+     (rk_a1Q5 : (!rks_a1Q6)) <- (remainders
+                                   (if (j_a1PY == k_a1PZ) then (rj_a1Q3 : rjs_a1Q4) else
+                                      radicals_a1PV ! k_a1PZ)),
+     rl_a1Q7 <- (if (k_a1PZ == l_a1Q0) then (rk_a1Q5 : rks_a1Q6) else
+                   radicals_a1PV ! l_a1Q0)]
+
+bcp_until :: Int -> [Int]
+bcp_until n_a1Q8
+  = [length (bcp_generator radicals_a1Q9 j_a1Qa) |
+     (investigate@j_a1Qa) <- [1 .. n_a1Q8]]
+  where (investigate@radicals_a1Q9)
+          = radical_generator (div n_a1Q8 2)
+
+ccp_until :: Int -> [Int]
+ccp_until (investigate@n_a28S)
+  = [length (ccp_generator radicals_a28T j_a28U) |
+     j_a28U <- [1 .. n_a28S]]
+  where (investigate@radicals_a28T)
+          = radical_generator (div n_a28S 2)
+
+paraffins_until :: Int -> [Int]
+paraffins_until (investigate@n_a28V)
+  = [length (bcp_generator radicals_a28W j_a28X) +
+       length (ccp_generator radicals_a28W j_a28X)
+     | j_a28X <- [1 .. n_a28V]]
+  where (investigate@radicals_a28W)
+          = radical_generator (div n_a28V 2)
+
+data Radical = H
+             | C Radical Radical Radical
+
+data Paraffin = BCP Radical Radical
+              | CCP Radical Radical Radical Radical

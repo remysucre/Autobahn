@@ -1,267 +1,164 @@
 
 ==================== Demand analysis ====================
-2017-02-15 13:14:59.840622 UTC
+2017-02-15 13:36:21.921282 UTC
 
 Result size of Demand analysis
-  = {terms: 395, types: 351, coercions: 0}
+  = {terms: 168, types: 70, coercions: 4}
 
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4y0 :: Integer
+-- RHS size: {terms: 4, types: 3, coercions: 4}
+lvl_s4iD :: Complex Double
+[LclId, Str=DmdType x]
+lvl_s4iD =
+  error
+    @ 'GHC.Types.PtrRepLifted
+    @ (Complex Double)
+    (GHC.Err.errorWithoutStackTrace_wild1
+     `cast` (Sym
+               (GHC.Classes.N:IP[0] <"callStack">_N <GHC.Stack.Types.CallStack>_N)
+             :: (GHC.Stack.Types.CallStack :: *)
+                ~R#
+                ((?callStack::GHC.Stack.Types.CallStack) :: Constraint)))
+    (GHC.CString.unpackCString# "Negative exponent"#)
+
+-- RHS size: {terms: 12, types: 4, coercions: 0}
+$seven_s4hy :: Int -> Bool
 [LclId,
- Str=DmdType,
+ Arity=1,
+ Str=DmdType <S(S),1*U(U)>,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4y0 = 2
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xZ :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xZ = 1
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xX :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xX = 1
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xV :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xV = 0
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4z2 :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4z2 = 0
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xQ :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xQ = 2
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xP :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xP = 1
-
--- RHS size: {terms: 8, types: 10, coercions: 0}
-powers_s4sd :: [Integer]
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
-         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 250 30}]
-powers_s4sd =
-  case GHC.Enum.$wenumDeltaInteger 2 1
-  of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4AD, ww2_a4AE #) ->
-  GHC.Types.: @ Integer ww1_a4AD ww2_a4AE
-  }
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 31 20}]
+$seven_s4hy =
+  \ (eta_a4ht [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case eta_a4ht
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+      __DEFAULT -> GHC.Types.False;
+      0# -> GHC.Types.True
+    }
+    }
 
 Rec {
--- RHS size: {terms: 3, types: 2, coercions: 0}
-powers :: [[Integer]]
-[LclIdX,
- Str=DmdType m2,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-powers = GHC.Types.: @ [Integer] powers_s4sd powers_s4se
-
--- RHS size: {terms: 5, types: 7, coercions: 0}
-powers_s4se [Occ=LoopBreaker] :: [[Integer]]
+-- RHS size: {terms: 41, types: 9, coercions: 0}
+g1_s4ik [Occ=LoopBreaker]
+  :: Complex Double -> Int -> Complex Double -> Complex Double
 [LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
-         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 60 0}]
-powers_s4se =
-  map
-    @ [Integer]
-    @ [Integer]
-    (zipWith
-       @ Integer
-       @ Integer
-       @ Integer
-       integer-gmp-1.0.0.1:GHC.Integer.Type.timesInteger
-       powers_s4sd)
-    powers
+ Arity=3,
+ CallArity=3,
+ Str=DmdType <S(SS),U(U(U),U(U))><S(S),1*U(U)><S(SS),1*U(U(U),U(U))>m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20 0] 274 0}]
+g1_s4ik =
+  \ (x1_a44e [Dmd=<S(SS),U(U(U),U(U))>] :: Complex Double)
+    (y1_a44f [Dmd=<S(S),1*U(U)>] :: Int)
+    (z_a44g [Dmd=<S(SS),1*U(U(U),U(U))>] :: Complex Double) ->
+    case y1_a44f
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+      __DEFAULT ->
+        case x1_a4js of wild_XK {
+          __DEFAULT ->
+            g1_s4ik
+              (Data.Complex.$fFloatingComplex_$s$c* x1_a44e x1_a44e)
+              (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
+              (Data.Complex.$fFloatingComplex_$s$c* x1_a44e z_a44g);
+          1# -> Data.Complex.$fFloatingComplex_$s$c* x1_a44e z_a44g
+        };
+      0# ->
+        g1_s4ik
+          (Data.Complex.$fFloatingComplex_$s$c* x1_a44e x1_a44e)
+          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4js 2#))
+          z_a44g
+    }
+    }
 end Rec }
 
--- RHS size: {terms: 20, types: 21, coercions: 0}
-neg_powers :: [[Integer]]
-[LclIdX,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
-         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 170 0}]
-neg_powers =
-  map
-    @ [Integer]
-    @ [Integer]
-    (zipWith
-       @ Bool
-       @ Integer
-       @ Integer
-       (\ (n_aO2 [Dmd=<L,1*U>] :: Bool)
-          (x_aO3 [Dmd=<S,1*U>, OS=OneShot] :: Integer) ->
-          case n_aO2 of _ [Occ=Dead, Dmd=<L,A>] {
-            False -> integer-gmp-1.0.0.1:GHC.Integer.Type.negateInteger x_aO3;
-            True -> x_aO3
-          })
-       (case GHC.List.$witerate @ Bool not GHC.Types.True
-        of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4nR, ww2_a4nS #) ->
-        GHC.Types.: @ Bool ww1_a4nR ww2_a4nS
-        }))
-    powers
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xB :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xB = 0
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xC :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xC = 0
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-pascal_s4AU :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-pascal_s4AU = 1
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-pascal_s4AW :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-pascal_s4AW = 2
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-pascal_s4AY :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-pascal_s4AY = 1
-
--- RHS size: {terms: 3, types: 2, coercions: 0}
-pascal_s4AX :: [Integer]
-[LclId,
- Str=DmdType m2,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-pascal_s4AX =
-  GHC.Types.: @ Integer pascal_s4AY (GHC.Types.[] @ Integer)
-
--- RHS size: {terms: 3, types: 1, coercions: 0}
-pascal_s4AV :: [Integer]
-[LclId,
- Str=DmdType m2,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-pascal_s4AV = GHC.Types.: @ Integer pascal_s4AW pascal_s4AX
-
--- RHS size: {terms: 3, types: 1, coercions: 0}
-pascal_s4rM :: [Integer]
-[LclId,
- Str=DmdType m2,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-pascal_s4rM = GHC.Types.: @ Integer pascal_s4AU pascal_s4AV
-
 Rec {
--- RHS size: {terms: 3, types: 2, coercions: 0}
-pascal :: [[Integer]]
-[LclIdX,
- Str=DmdType m2,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-pascal = GHC.Types.: @ [Integer] pascal_s4rM pascal_s4rN
-
--- RHS size: {terms: 37, types: 37, coercions: 0}
-pascal_s4rN [Occ=LoopBreaker] :: [[Integer]]
+-- RHS size: {terms: 35, types: 7, coercions: 0}
+f_s4i8 [Occ=LoopBreaker] :: Complex Double -> Int -> Complex Double
 [LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=False, ConLike=False,
-         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 280 0}]
-pascal_s4rN =
-  map
-    @ [Integer]
-    @ [Integer]
-    (\ (line_a1JL [Dmd=<S,U>, OS=ProbOneShot] :: [Integer]) ->
-       letrec {
-         go_a4oE [Occ=LoopBreaker] :: [Integer] -> [Integer] -> [Integer]
-         [LclId,
-          Arity=2,
-          CallArity=2,
-          Str=DmdType <S,1*U><S,1*U>,
-          Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True, ConLike=True,
-                  WorkFree=True, Expandable=True, Guidance=IF_ARGS [90 60] 170 80}]
-         go_a4oE =
-           \ (ds_a4oF [Dmd=<S,1*U>] :: [Integer])
-             (eta_B1 [Dmd=<S,1*U>] :: [Integer]) ->
-             case ds_a4oF of _ [Occ=Dead, Dmd=<L,A>] {
-               [] ->
-                 case eta_B1 of _ [Occ=Dead, Dmd=<L,A>] {
-                   [] -> GHC.Types.[] @ Integer;
-                   : y_a4re ys_a4rf [Dmd=<L,A>] ->
-                     GHC.Types.:
-                       @ Integer
-                       (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger lvl_s4xB y_a4re)
-                       (GHC.Types.[] @ Integer)
-                 };
-               : y_a4oK [Dmd=<L,1*U>] ys_a4oL [Dmd=<L,1*U>] ->
-                 case eta_B1 of _ [Occ=Dead, Dmd=<L,A>] {
-                   [] -> GHC.Types.[] @ Integer;
-                   : y_a4re ys_a4rf [Dmd=<L,1*U>] ->
-                     GHC.Types.:
-                       @ Integer
-                       (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger y_a4oK y_a4re)
-                       (go_a4oE ys_a4oL ys_a4rf)
-                 }
-             }; } in
-       go_a4oE line_a1JL (GHC.Types.: @ Integer lvl_s4xC line_a1JL))
-    pascal
+ Arity=2,
+ CallArity=2,
+ Str=DmdType <S,U(U(U),U(U))><S(S),1*U(U)>m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 204 0}]
+f_s4i8 =
+  \ (x_a43Z [Dmd=<S,U(U(U),U(U))>] :: Complex Double)
+    (y_a440 [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case y_a440
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+      __DEFAULT ->
+        case x1_a4js of wild_XK {
+          __DEFAULT ->
+            g1_s4ik
+              (Data.Complex.$fFloatingComplex_$s$c* x_a43Z x_a43Z)
+              (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
+              x_a43Z;
+          1# -> x_a43Z
+        };
+      0# ->
+        f_s4i8
+          (Data.Complex.$fFloatingComplex_$s$c* x_a43Z x_a43Z)
+          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4js 2#))
+    }
+    }
 end Rec }
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s4p4 :: GHC.Types.TrName
+lvl_s4kJ :: Double
+[LclId,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 20}]
+lvl_s4kJ = GHC.Types.D# 1.0##
+
+-- RHS size: {terms: 3, types: 1, coercions: 0}
+lvl_s4iA :: Complex Double
+[LclId,
+ Str=DmdType m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
+lvl_s4iA =
+  Data.Complex.:+ @ Double lvl_s4kJ Data.Complex.$fFloatingComplex1
+
+-- RHS size: {terms: 21, types: 8, coercions: 0}
+$s^_s4h0 [InlPrag=[1]] :: Complex Double -> Int -> Complex Double
+[LclId,
+ Arity=2,
+ Str=DmdType <L,U(U(U),U(U))><S(S),1*U(U)>m,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 82 0}]
+$s^_s4h0 =
+  \ (eta_a38a [Dmd=<L,U(U(U),U(U))>] :: Complex Double)
+    (eta1_a38b [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case eta1_a38b
+    of wild_a4kM [Dmd=<L,1*U(U)>] { GHC.Types.I# x_a4kO [Dmd=<S,U>] ->
+    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# x_a4kO 0#)
+    of _ [Occ=Dead, Dmd=<L,A>] {
+      False ->
+        case x_a4kO of _ [Occ=Dead, Dmd=<L,A>] {
+          __DEFAULT -> f_s4i8 eta_a38a wild_a4kM;
+          0# -> lvl_s4iA
+        };
+      True -> lvl_s4iD
+    }
+    }
+
+-- RHS size: {terms: 2, types: 0, coercions: 0}
+$trModule_s46I :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s4p4 = GHC.Types.TrNameS "Dum"#
+$trModule_s46I = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s4p3 :: GHC.Types.TrName
+$trModule_s46J :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s4p3 = GHC.Types.TrNameS "main"#
+$trModule_s46J = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -269,353 +166,49 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_s4p3 $trModule_s4p4
+Dum.$trModule = GHC.Types.Module $trModule_s46I $trModule_s46J
 
--- RHS size: {terms: 6, types: 3, coercions: 0}
-$sfromIntegral_s4xi [InlPrag=NOINLINE[1]] :: Int -> Integer
-[LclId,
- Arity=1,
- Str=DmdType <S(S),1*U(U)>m1,
- Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True,
-         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=False)
-         Tmpl= \ (eta_a4oR [Occ=Once!] :: Int) ->
-                 case eta_a4oR of _ [Occ=Dead] { GHC.Types.I# i_a4yM [Occ=Once] ->
-                 integer-gmp-1.0.0.1:GHC.Integer.Type.smallInteger i_a4yM
-                 }}]
-$sfromIntegral_s4xi =
-  \ (eta_a4oR [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta_a4oR
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# i_a4yM [Dmd=<S,U>] ->
-    integer-gmp-1.0.0.1:GHC.Integer.Type.smallInteger i_a4yM
-    }
-
--- RHS size: {terms: 12, types: 4, coercions: 0}
-$seven_s4x1 :: Int -> Bool
-[LclId,
- Arity=1,
- Str=DmdType <S(S),1*U(U)>,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 31 20}]
-$seven_s4x1 =
-  \ (eta_a4wW [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta_a4wW
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4yt [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4yt 2# of _ [Occ=Dead, Dmd=<L,A>] {
-      __DEFAULT -> GHC.Types.False;
-      0# -> GHC.Types.True
-    }
-    }
-
--- RHS size: {terms: 227, types: 200, coercions: 0}
-bernoulli :: forall a_a2lQ. Integral a_a2lQ => Int -> Ratio a_a2lQ
+-- RHS size: {terms: 32, types: 8, coercions: 0}
+f :: Int -> Complex Double
 [LclIdX,
  Arity=1,
- Str=DmdType <L,U(U(U(U,U,U,U,U,U,U),U,U),A,C(C1(U)),C(C1(U)),A,A,A,A,A)>,
+ Str=DmdType <S(S),1*U(U)>m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=NEVER}]
-bernoulli =
-  \ (@ a_a2lQ)
-    ($dIntegral_a4mf [Dmd=<L,U(U(U(U,U,U,U,U,U,U),U,U),A,C(C1(U)),C(C1(U)),A,A,A,A,A)>]
-       :: Integral a_a2lQ) ->
-    let {
-      $dNum_s4wK [Dmd=<L,1*U(1*U,A,A)>] :: Real a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(SLLLLLLLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=True, Guidance=IF_ARGS [] 20 0}]
-      $dNum_s4wK = GHC.Real.$p1Integral @ a_a2lQ $dIntegral_a4mf } in
-    let {
-      $dNum_s4wJ [Dmd=<L,U(A,A,A,1*C1(U),A,A,C(U))>] :: Num a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(SLLLLLLLL),A> s4wK-><S(SLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=True, Guidance=IF_ARGS [] 20 0}]
-      $dNum_s4wJ = GHC.Real.$p1Real @ a_a2lQ $dNum_s4wK } in
-    let {
-      lvl_s4y1 :: Ratio a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(S(S(LLLC(S)LLL)LL)LC(C(S))LLLLLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 200 30}]
-      lvl_s4y1 =
-        case GHC.Real.$w%
-               @ a_a2lQ
-               $dIntegral_a4mf
-               (fromInteger @ a_a2lQ $dNum_s4wJ lvl_s4xZ)
-               (fromInteger @ a_a2lQ $dNum_s4wJ lvl_s4y0)
-        of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4ow, ww2_a4ox #) ->
-        case negate
-               @ a_a2lQ
-               (GHC.Real.$p1Real
-                  @ a_a2lQ (GHC.Real.$p1Integral @ a_a2lQ $dIntegral_a4mf))
-               ww1_a4ow
-        of dt_a4wn { __DEFAULT ->
-        GHC.Real.:% @ a_a2lQ dt_a4wn ww2_a4ox
-        }
-        } } in
-    let {
-      lvl_s4xR [Dmd=<L,U(U,U)>] :: Ratio a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(SLC(C(S))LLLLLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 150 30}]
-      lvl_s4xR =
-        case GHC.Real.$w%
-               @ a_a2lQ
-               $dIntegral_a4mf
-               (negate
-                  @ a_a2lQ $dNum_s4wJ (fromInteger @ a_a2lQ $dNum_s4wJ lvl_s4xP))
-               (fromInteger @ a_a2lQ $dNum_s4wJ lvl_s4xQ)
-        of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4ow, ww2_a4ox #) ->
-        GHC.Real.:% @ a_a2lQ ww1_a4ow ww2_a4ox
-        } } in
-    let {
-      lvl_s4xY :: Ratio a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(SLLLLLLLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 50 30}]
-      lvl_s4xY =
-        case GHC.Real.$w$cfromInteger @ a_a2lQ $dIntegral_a4mf lvl_s4xX
-        of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4wa, ww2_a4wb #) ->
-        GHC.Real.:% @ a_a2lQ ww1_a4wa ww2_a4wb
-        } } in
-    let {
-      lvl_s4xW :: Ratio a_a2lQ
-      [LclId,
-       Str=DmdType {a4mf-><S(SLLLLLLLL),A>},
-       Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-               WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 50 30}]
-      lvl_s4xW =
-        case GHC.Real.$w$cfromInteger @ a_a2lQ $dIntegral_a4mf lvl_s4xV
-        of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4wa, ww2_a4wb #) ->
-        GHC.Real.:% @ a_a2lQ ww1_a4wa ww2_a4wb
-        } } in
-    \ (ds_d4mW [Dmd=<S(S),1*U(1*U)>] :: Int) ->
-      case ds_d4mW
-      of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# ds_d4ni [Dmd=<S,1*U>] ->
-      case ds_d4ni of ds_X4nu {
-        __DEFAULT ->
-          case GHC.Prim.remInt# ds_X4nu 2# of _ [Occ=Dead, Dmd=<L,A>] {
-            __DEFAULT -> lvl_s4xW;
-            0# ->
-              case lvl_s4xR
-              of _ [Occ=Dead, Dmd=<L,A>]
-              { GHC.Real.:% ww1_a4vM [Dmd=<S,U>] ww2_a4vN [Dmd=<S,U>] ->
-              let {
-                karg_s4E6 [Dmd=<S,1*U(U,U)>] :: Ratio a_a2lQ
-                [LclId,
-                 Str=DmdType m {a4mf-><S(SLLLLLLLL),A>},
-                 Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-                         WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 150 30}]
-                karg_s4E6 =
-                  case GHC.Real.$w$cfromInteger @ a_a2lQ $dIntegral_a4mf 0
-                  of _ [Occ=Dead, Dmd=<L,A>] { (# ww1_a4wa, ww2_a4wb #) ->
-                  GHC.Real.:% @ a_a2lQ ww1_a4wa ww2_a4wb
-                  } } in
-              case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.># 2# ds_X4nu)
-              of _ [Occ=Dead, Dmd=<L,A>] {
-                False ->
-                  let {
-                    powers_s4wH :: [Integer]
-                    [LclId,
-                     Str=DmdType {X4nu-><S,A>},
-                     Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-                             WorkFree=False, Expandable=False, Guidance=IF_ARGS [] 31 0}]
-                    powers_s4wH =
-                      GHC.List.$w!! @ [Integer] neg_powers (GHC.Prim.-# ds_X4nu 1#) } in
-                  letrec {
-                    go_a4zl [Occ=LoopBreaker]
-                      :: GHC.Prim.Int# -> [[Integer]] -> Ratio a_a2lQ -> Ratio a_a2lQ
-                    [LclId,
-                     Arity=3,
-                     CallArity=3,
-                     Str=DmdType <L,U><S,1*U><S,1*U(U,U)>m,
-                     Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True, ConLike=True,
-                             WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 30 20] 624 0}]
-                    go_a4zl =
-                      \ (x_a4zm :: GHC.Prim.Int#)
-                        (eta_B1 [Dmd=<S,1*U>] :: [[Integer]])
-                        (eta_X2 [Dmd=<S,1*U(U,U)>] :: Ratio a_a2lQ) ->
-                        case eta_B1 of _ [Occ=Dead, Dmd=<L,A>] {
-                          [] -> eta_X2;
-                          : y_a4re [Dmd=<L,1*U>] ys_a4rf [Dmd=<L,1*U>] ->
-                            let {
-                              karg_s4Fk [Dmd=<S,1*U(U,U)>] :: Ratio a_a2lQ
-                              [LclId,
-                               Str=DmdType m {X2-><S(SS),A> a4mf-><S(SLC(C(S))LLLLLL),A>},
-                               Unf=Unf{Src=<vanilla>, TopLvl=False, Value=False, ConLike=False,
-                                       WorkFree=False, Expandable=False,
-                                       Guidance=IF_ARGS [] 531 30}]
-                              karg_s4Fk =
-                                case eta_X2
-                                of _ [Occ=Dead, Dmd=<L,A>]
-                                { GHC.Real.:% ww1_X4xz [Dmd=<S,U>] ww2_X4xC [Dmd=<S,U>] ->
-                                case GHC.Real.$w%
-                                       @ a_a2lQ
-                                       $dIntegral_a4mf
-                                       (fromInteger
-                                          @ a_a2lQ
-                                          $dNum_s4wJ
-                                          (letrec {
-                                             go_a4qm [Occ=LoopBreaker]
-                                               :: [Integer] -> [Integer] -> Integer -> Integer
-                                             [LclId,
-                                              Arity=3,
-                                              CallArity=3,
-                                              Str=DmdType <S,1*U><L,1*U><S,1*U>,
-                                              Unf=Unf{Src=<vanilla>, TopLvl=False, Value=True,
-                                                      ConLike=True, WorkFree=True, Expandable=True,
-                                                      Guidance=IF_ARGS [30 30 0] 140 0}]
-                                             go_a4qm =
-                                               \ (ds_a4qn [Dmd=<S,1*U>] :: [Integer])
-                                                 (_ys_a4qo [Dmd=<L,1*U>] :: [Integer])
-                                                 (eta_X1Y [Dmd=<S,1*U>] :: Integer) ->
-                                                 case ds_a4qn of _ [Occ=Dead, Dmd=<L,A>] {
-                                                   [] -> eta_X1Y;
-                                                   : ipv_a4qt [Dmd=<L,1*U>]
-                                                     ipv1_a4qu [Dmd=<L,1*U>] ->
-                                                     case _ys_a4qo of _ [Occ=Dead, Dmd=<L,A>] {
-                                                       [] -> eta_X1Y;
-                                                       : ipv2_a4qA [Dmd=<S,U>]
-                                                         ipv3_a4qB [Dmd=<L,1*U>] ->
-                                                         go_a4qm
-                                                           ipv1_a4qu
-                                                           ipv3_a4qB
-                                                           (integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger
-                                                              eta_X1Y
-                                                              (integer-gmp-1.0.0.1:GHC.Integer.Type.timesInteger
-                                                                 ipv_a4qt ipv2_a4qA))
-                                                     }
-                                                 }; } in
-                                           integer-gmp-1.0.0.1:GHC.Integer.Type.minusInteger
-                                             (go_a4qm
-                                                powers_s4wH
-                                                (case y_a4re of _ [Occ=Dead, Dmd=<L,A>] {
-                                                   [] ->
-                                                     case GHC.List.scanl2 of wild_00 [Dmd=<B,A>] {
-                                                     };
-                                                   : ds1_a4oY [Dmd=<L,A>] xs_a4oZ [Dmd=<S,1*U>] ->
-                                                     case xs_a4oZ of _ [Occ=Dead, Dmd=<L,A>] {
-                                                       [] -> GHC.List.scanl2 @ Integer;
-                                                       : ds1_X4rg [Dmd=<L,A>]
-                                                         xs_X4ri [Dmd=<S,1*U>] ->
-                                                         xs_X4ri
-                                                     }
-                                                 })
-                                                lvl_s4z2)
-                                             (integer-gmp-1.0.0.1:GHC.Integer.Type.smallInteger
-                                                x_a4zm)))
-                                       (fromInteger
-                                          @ a_a2lQ
-                                          $dNum_s4wJ
-                                          (integer-gmp-1.0.0.1:GHC.Integer.Type.smallInteger
-                                             (GHC.Prim.+# x_a4zm 1#)))
-                                of _ [Occ=Dead, Dmd=<L,A>]
-                                { (# ww1_a4ow [Dmd=<S,U>], ww2_a4ox [Dmd=<S,U>] #) ->
-                                case GHC.Real.$w$c+
-                                       @ a_a2lQ $dIntegral_a4mf ww1_X4xz ww2_X4xC ww1_a4ow ww2_a4ox
-                                of _ [Occ=Dead, Dmd=<L,A>] { (# ww7_a4vY, ww8_a4vZ #) ->
-                                GHC.Real.:% @ a_a2lQ ww7_a4vY ww8_a4vZ
-                                }
-                                }
-                                } } in
-                            case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.==# x_a4zm ds_X4nu)
-                            of _ [Occ=Dead, Dmd=<L,A>] {
-                              False -> go_a4zl (GHC.Prim.+# x_a4zm 1#) ys_a4rf karg_s4Fk;
-                              True -> karg_s4Fk
-                            }
-                        }; } in
-                  case go_a4zl 2# pascal karg_s4E6
-                  of _ [Occ=Dead, Dmd=<L,A>]
-                  { GHC.Real.:% ww4_a4vT [Dmd=<S,U>] ww5_a4vU [Dmd=<S,U>] ->
-                  case GHC.Real.$w$c+
-                         @ a_a2lQ $dIntegral_a4mf ww1_a4vM ww2_a4vN ww4_a4vT ww5_a4vU
-                  of _ [Occ=Dead, Dmd=<L,A>] { (# ww7_a4vY, ww8_a4vZ #) ->
-                  GHC.Real.:% @ a_a2lQ ww7_a4vY ww8_a4vZ
-                  }
-                  };
-                True ->
-                  case karg_s4E6
-                  of _ [Occ=Dead, Dmd=<L,A>]
-                  { GHC.Real.:% ww4_a4vT [Dmd=<S,U>] ww5_a4vU [Dmd=<S,U>] ->
-                  case GHC.Real.$w$c+
-                         @ a_a2lQ $dIntegral_a4mf ww1_a4vM ww2_a4vN ww4_a4vT ww5_a4vU
-                  of _ [Occ=Dead, Dmd=<L,A>] { (# ww7_a4vY, ww8_a4vZ #) ->
-                  GHC.Real.:% @ a_a2lQ ww7_a4vY ww8_a4vZ
-                  }
-                  }
-              }
-              }
-          };
-        0# -> lvl_s4xY;
-        1# -> lvl_s4y1
-      }
-      }
-
--- RHS size: {terms: 12, types: 4, coercions: 0}
-$sodd_s4xh :: Int -> Bool
-[LclId,
- Arity=1,
- Str=DmdType <S(S),1*U(U)>,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 31 20}]
-$sodd_s4xh =
-  \ (x_a4oj [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case x_a4oj
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4yt [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4yt 2# of _ [Occ=Dead, Dmd=<L,A>] {
-      __DEFAULT -> GHC.Types.True;
-      0# -> GHC.Types.False
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 122 0}]
+f =
+  \ (n_a2Ke [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case n_a2Ke
+    of n_X2Ki [Dmd=<L,1*U(U)>] { GHC.Types.I# ipv_s479 [Dmd=<S,U>] ->
+    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# ipv_s479 0#)
+    of _ [Occ=Dead, Dmd=<L,A>] {
+      False ->
+        case ipv_s479 of wild_XL {
+          __DEFAULT ->
+            f_s4i8
+              (case GHC.Prim./##
+                      6.283185307179586## (GHC.Prim.int2Double# wild_XL)
+               of wild2_a4lh { __DEFAULT ->
+               Data.Complex.:+
+                 @ Double
+                 (GHC.Types.D# (GHC.Prim.cosDouble# wild2_a4lh))
+                 (GHC.Types.D# (GHC.Prim.sinDouble# wild2_a4lh))
+               })
+              n_X2Ki;
+          0# -> lvl_s4iA
+        };
+      True -> lvl_s4iD
     }
     }
-
--- RHS size: {terms: 1, types: 0, coercions: 0}
-lvl_s4xw :: Integer
-[LclId,
- Str=DmdType,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 100 0}]
-lvl_s4xw = 0
-
--- RHS size: {terms: 3, types: 2, coercions: 0}
-$ssum_s4xg [InlPrag=INLINE (sat-args=0)] :: [Integer] -> Integer
-[LclId,
- Arity=1,
- Str=DmdType,
- Unf=Unf{Src=InlineStable, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=False, Expandable=False,
-         Guidance=ALWAYS_IF(arity=0,unsat_ok=False,boring_ok=False)
-         Tmpl= GHC.List.foldl
-                 @ Integer
-                 @ Integer
-                 integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger
-                 (GHC.Num.$fNumInteger_$cfromInteger 0)}]
-$ssum_s4xg =
-  GHC.List.foldl
-    @ Integer
-    @ Integer
-    integer-gmp-1.0.0.1:GHC.Integer.Type.plusInteger
-    lvl_s4xw
 
 
 ------ Local rules for imported ids --------
-"SPEC/Dum fromIntegral @ Int @ Integer" [1]
-    forall ($dIntegral_s4wQ :: Integral Int)
-           ($dNum_s4wR :: Num Integer).
-      fromIntegral @ Int @ Integer $dIntegral_s4wQ $dNum_s4wR
-      = $sfromIntegral_s4xi
 "SPEC/Dum even @ Int" [ALWAYS]
-    forall ($dIntegral_s4x0 :: Integral Int).
-      even @ Int $dIntegral_s4x0
-      = $seven_s4x1
-"SPEC/Dum odd @ Int" [ALWAYS]
-    forall ($dIntegral_s4wT :: Integral Int).
-      odd @ Int $dIntegral_s4wT
-      = $sodd_s4xh
-"SPEC/Dum sum @ Integer" [ALWAYS]
-    forall ($dNum_s4x7 :: Num Integer).
-      GHC.List.sum @ Integer $dNum_s4x7
-      = $ssum_s4xg
+    forall ($dIntegral_s4hx :: Integral Int).
+      even @ Int $dIntegral_s4hx
+      = $seven_s4hy
+"SPEC/Dum ^ @ (Complex Double) @ Int" [1]
+    forall ($dNum_s4gY :: Num (Complex Double))
+           ($dIntegral_s4gZ :: Integral Int).
+      ^ @ (Complex Double) @ Int $dNum_s4gY $dIntegral_s4gZ
+      = $s^_s4h0
 

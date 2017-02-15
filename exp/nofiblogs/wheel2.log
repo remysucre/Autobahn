@@ -1,0 +1,48 @@
+[1 of 1] Compiling Dum              ( Dum.hs, Dum.o )
+["primes","s_azg","ms_azh","ns_azi","Wheel s_azg ms_azh ns_azi","(Wheel s_azg ms_azh ns_azi)","!(Wheel s_azg ms_azh ns_azi)","(!(Wheel s_azg ms_azh ns_azi))","ws_azj","(!(Wheel s_azg ms_azh ns_azi)) : ws_azj","((!(Wheel s_azg ms_azh ns_azi)) : ws_azj)","ps_azk","qs_azl","o_azr","n_aTt","!n_aTt","(!n_aTt)","rs_aTu","o_a1Pd","n_a1Pe","rs_a1Pf","n'_a1Pg","!n'_a1Pg","(!n'_a1Pg)","sp_azp","q_azq","squares","p_a1SX","!p_a1SX","(!p_a1SX)","wheels","s_a1SY","safebang@!s_a1SY","(!s_a1SY)","ms_a1SZ","ns_a1T0","safebang@!ns_a1T0","(!ns_a1T0)","Wheel (!s_a1SY) ms_a1SZ (!ns_a1T0)","(Wheel (!s_a1SY) ms_a1SZ (!ns_a1T0))","!(Wheel (!s_a1SY) ms_a1SZ (!ns_a1T0))","(!(Wheel (!s_a1SY) ms_a1SZ (!ns_a1T0)))","p_a1T1","safebang@!p_a1T1","(!p_a1T1)","q_a1T2","xs_a1T3","ns'_a1T4","!ns'_a1T4","(!ns'_a1T4)","(xs_a1T3, (!ns'_a1T4))","ms'_a1T5","0","_","t_a1T9","o_a1Ta","!o_a1Ta","(!o_a1Ta)","n_a1Tb","rs_a1Tc","o_a22Q","n_a22R","!n_a22R","(!n_a22R)","rs_a22S","n'_a22T","!n'_a22T","(!n'_a22T)"]
+{-# LANGUAGE BangPatterns #-}
+module Dum where
+import System.Environment
+
+primes :: [Int]
+primes = spiral wheels primes squares
+spiral ((investigate@(Wheel s_azg ms_azh ns_azi)) : ws_azj) ps_azk
+  qs_azl = foldr turn0_azn (roll_azm s_azg) ns_azi
+  where roll_azm o_azr
+          = foldr (turn_azo o_azr)
+              (foldr (turn_azo o_azr) (roll_azm (o_azr + s_azg)) ns_azi)
+              ms_azh
+        turn0_azn (investigate@n_aTt) rs_aTu
+          = if n_aTt < q_azq then n_aTt : rs_aTu else sp_azp
+        turn_azo o_a1Pd n_a1Pe rs_a1Pf
+          = let (investigate@n'_a1Pg) = o_a1Pd + n_a1Pe in
+              if n'_a1Pg == 2 || n'_a1Pg < q_azq then n'_a1Pg : rs_a1Pf else
+                dropWhile (< n'_a1Pg) sp_azp
+        sp_azp = spiral ws_azj (tail ps_azk) (tail qs_azl)
+        q_azq = head qs_azl
+
+squares :: [Int]
+squares = [p_a1SX * p_a1SX | (investigate@p_a1SX) <- primes]
+
+wheels :: [Wheel]
+wheels = Wheel 1 [1] [] : zipWith3 nextSize wheels primes squares
+nextSize (investigate@(Wheel (!s_a1SY) ms_a1SZ (!ns_a1T0)))
+  (!p_a1T1) q_a1T2 = Wheel (s_a1SY * p_a1T1) ms'_a1T5 ns'_a1T4
+  where (xs_a1T3, (investigate@ns'_a1T4))
+          = span (<= q_a1T2)
+              (foldr turn0_a1T7 (roll_a1T6 (p_a1T1 - 1) s_a1SY) ns_a1T0)
+        ms'_a1T5 = foldr turn0_a1T7 xs_a1T3 ms_a1SZ
+        roll_a1T6 0 _ = []
+        roll_a1T6 t_a1T9 (investigate@o_a1Ta)
+          = foldr (turn_a1T8 o_a1Ta)
+              (foldr (turn_a1T8 o_a1Ta)
+                 (roll_a1T6 (t_a1T9 - 1) (o_a1Ta + s_a1SY))
+                 ns_a1T0)
+              ms_a1SZ
+        turn0_a1T7 n_a1Tb rs_a1Tc
+          = if n_a1Tb `mod` p_a1T1 > 0 then n_a1Tb : rs_a1Tc else rs_a1Tc
+        turn_a1T8 o_a22Q (investigate@n_a22R) rs_a22S
+          = let (investigate@n'_a22T) = o_a22Q + n_a22R in
+              if n'_a22T `mod` p_a1T1 > 0 then n'_a22T : rs_a22S else rs_a22S
+
+data Wheel = Wheel Int [Int] [Int]

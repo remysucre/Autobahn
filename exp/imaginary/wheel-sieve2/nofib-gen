@@ -1,0 +1,30 @@
+HC = /data/dan/ghc-8/bin/ghc
+HC_OPTS = -O2 -Rghc-timing -H32m -hisuf hi -rtsopts -XBangPatterns -O2 -funbox-strict-fields
+RUNTEST_OPTS = -ghc-timing +RTS -M300m -RTS
+==nofib== wheel-sieve2: time to compile Main follows...
+/data/dan/ghc-8/bin/ghc -O2 -Rghc-timing -H32m -hisuf hi -rtsopts -XBangPatterns -O2 -funbox-strict-fields -c Main.hs -o Main.o
+<<ghc: 284419504 bytes, 75 GCs, 12985137/34442632 avg/max bytes residency (6 samples), 76M in use, 0.003 INIT (0.003 elapsed), 0.335 MUT (0.350 elapsed), 0.466 GC (0.471 elapsed) :ghc>>
+==nofib== wheel-sieve2: size of Main.o follows...
+   text	   data	    bss	    dec	    hex	filename
+   1414	    608	      0	   2022	    7e6	Main.o
+==nofib== wheel-sieve2: time to link wheel-sieve2 follows...
+<<ghc: 23614120 bytes, 15 GCs, 646404/1116088 avg/max bytes residency (2 samples), 29M in use, 0.003 INIT (0.003 elapsed), 0.016 MUT (0.581 elapsed), 0.058 GC (0.058 elapsed) :ghc>>
+==nofib== wheel-sieve2: size of wheel-sieve2 follows...
+   text	   data	    bss	    dec	    hex	filename
+ 884239	  55968	  17192	 957399	  e9bd7	wheel-sieve2
+==nofib== wheel-sieve2: time to run wheel-sieve2 follows...
+timeout 2m ../../runstdtest/runstdtest ./wheel-sieve2  -o1 wheel-sieve2.stdout  -ghc-timing  +RTS -M300m -RTS    20000;
+
+real	0m0.006s
+user	0m0.001s
+sys	0m0.005s
+././wheel-sieve2 +RTS -M300m -RTS 20000 < /dev/null
+**** expected exit status 0 not seen ; got 1
+././wheel-sieve2 +RTS -M300m -RTS 20000 < /dev/null
+expected stderr not matched by reality
+--- /tmp/no_stderr23991	2016-12-15 15:29:30.922077927 -0500
++++ /tmp/runtest23991.2	2016-12-15 15:29:30.932077930 -0500
+@@ -0,0 +1 @@
++wheel-sieve2: <<loop>>
+make: *** [runtests] Error 1
+make: Target `default' not remade because of errors.
