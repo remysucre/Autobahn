@@ -1,14 +1,14 @@
 
 ==================== Demand analysis ====================
-2017-02-15 13:36:21.921282 UTC
+2017-02-19 22:21:16.701211 UTC
 
 Result size of Demand analysis
   = {terms: 168, types: 70, coercions: 4}
 
 -- RHS size: {terms: 4, types: 3, coercions: 4}
-lvl_s4iD :: Complex Double
+lvl_s4iR :: Complex Double
 [LclId, Str=DmdType x]
-lvl_s4iD =
+lvl_s4iR =
   error
     @ 'GHC.Types.PtrRepLifted
     @ (Complex Double)
@@ -21,17 +21,17 @@ lvl_s4iD =
     (GHC.CString.unpackCString# "Negative exponent"#)
 
 -- RHS size: {terms: 12, types: 4, coercions: 0}
-$seven_s4hy :: Int -> Bool
+$seven_s4hM :: Int -> Bool
 [LclId,
  Arity=1,
  Str=DmdType <S(S),1*U(U)>,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 31 20}]
-$seven_s4hy =
-  \ (eta_a4ht [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta_a4ht
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+$seven_s4hM =
+  \ (eta_a4hH [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case eta_a4hH
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
       __DEFAULT -> GHC.Types.False;
       0# -> GHC.Types.True
     }
@@ -39,7 +39,7 @@ $seven_s4hy =
 
 Rec {
 -- RHS size: {terms: 41, types: 9, coercions: 0}
-g1_s4ik [Occ=LoopBreaker]
+g1_s4iy [Occ=LoopBreaker]
   :: Complex Double -> Int -> Complex Double -> Complex Double
 [LclId,
  Arity=3,
@@ -47,118 +47,118 @@ g1_s4ik [Occ=LoopBreaker]
  Str=DmdType <S(SS),U(U(U),U(U))><S(S),1*U(U)><S(SS),1*U(U(U),U(U))>m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20 0] 274 0}]
-g1_s4ik =
-  \ (x1_a44e [Dmd=<S(SS),U(U(U),U(U))>] :: Complex Double)
-    (y1_a44f [Dmd=<S(S),1*U(U)>] :: Int)
-    (z_a44g [Dmd=<S(SS),1*U(U(U),U(U))>] :: Complex Double) ->
-    case y1_a44f
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+g1_s4iy =
+  \ (x1_a44s [Dmd=<S(SS),U(U(U),U(U))>] :: Complex Double)
+    (y1_a44t [Dmd=<S(S),1*U(U)>] :: Int)
+    (z_a44u [Dmd=<S(SS),1*U(U(U),U(U))>] :: Complex Double) ->
+    case y1_a44t
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
       __DEFAULT ->
-        case x1_a4js of wild_XK {
+        case x1_a4jG of wild_XK {
           __DEFAULT ->
-            g1_s4ik
-              (Data.Complex.$fFloatingComplex_$s$c* x1_a44e x1_a44e)
+            g1_s4iy
+              (Data.Complex.$fFloatingComplex_$s$c* x1_a44s x1_a44s)
               (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
-              (Data.Complex.$fFloatingComplex_$s$c* x1_a44e z_a44g);
-          1# -> Data.Complex.$fFloatingComplex_$s$c* x1_a44e z_a44g
+              (Data.Complex.$fFloatingComplex_$s$c* x1_a44s z_a44u);
+          1# -> Data.Complex.$fFloatingComplex_$s$c* x1_a44s z_a44u
         };
       0# ->
-        g1_s4ik
-          (Data.Complex.$fFloatingComplex_$s$c* x1_a44e x1_a44e)
-          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4js 2#))
-          z_a44g
+        g1_s4iy
+          (Data.Complex.$fFloatingComplex_$s$c* x1_a44s x1_a44s)
+          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4jG 2#))
+          z_a44u
     }
     }
 end Rec }
 
 Rec {
 -- RHS size: {terms: 35, types: 7, coercions: 0}
-f_s4i8 [Occ=LoopBreaker] :: Complex Double -> Int -> Complex Double
+f_s4im [Occ=LoopBreaker] :: Complex Double -> Int -> Complex Double
 [LclId,
  Arity=2,
  CallArity=2,
  Str=DmdType <S,U(U(U),U(U))><S(S),1*U(U)>m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 204 0}]
-f_s4i8 =
-  \ (x_a43Z [Dmd=<S,U(U(U),U(U))>] :: Complex Double)
-    (y_a440 [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case y_a440
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4js [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4js 2# of _ [Occ=Dead, Dmd=<L,A>] {
+f_s4im =
+  \ (x_a44d [Dmd=<S,U(U(U),U(U))>] :: Complex Double)
+    (y_a44e [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case y_a44e
+    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
+    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
       __DEFAULT ->
-        case x1_a4js of wild_XK {
+        case x1_a4jG of wild_XK {
           __DEFAULT ->
-            g1_s4ik
-              (Data.Complex.$fFloatingComplex_$s$c* x_a43Z x_a43Z)
+            g1_s4iy
+              (Data.Complex.$fFloatingComplex_$s$c* x_a44d x_a44d)
               (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
-              x_a43Z;
-          1# -> x_a43Z
+              x_a44d;
+          1# -> x_a44d
         };
       0# ->
-        f_s4i8
-          (Data.Complex.$fFloatingComplex_$s$c* x_a43Z x_a43Z)
-          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4js 2#))
+        f_s4im
+          (Data.Complex.$fFloatingComplex_$s$c* x_a44d x_a44d)
+          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4jG 2#))
     }
     }
 end Rec }
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-lvl_s4kJ :: Double
+lvl_s4kX :: Double
 [LclId,
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 20}]
-lvl_s4kJ = GHC.Types.D# 1.0##
+lvl_s4kX = GHC.Types.D# 1.0##
 
 -- RHS size: {terms: 3, types: 1, coercions: 0}
-lvl_s4iA :: Complex Double
+lvl_s4iO :: Complex Double
 [LclId,
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-lvl_s4iA =
-  Data.Complex.:+ @ Double lvl_s4kJ Data.Complex.$fFloatingComplex1
+lvl_s4iO =
+  Data.Complex.:+ @ Double lvl_s4kX Data.Complex.$fFloatingComplex1
 
 -- RHS size: {terms: 21, types: 8, coercions: 0}
-$s^_s4h0 [InlPrag=[1]] :: Complex Double -> Int -> Complex Double
+$s^_s4he [InlPrag=[1]] :: Complex Double -> Int -> Complex Double
 [LclId,
  Arity=2,
  Str=DmdType <L,U(U(U),U(U))><S(S),1*U(U)>m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 82 0}]
-$s^_s4h0 =
-  \ (eta_a38a [Dmd=<L,U(U(U),U(U))>] :: Complex Double)
-    (eta1_a38b [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta1_a38b
-    of wild_a4kM [Dmd=<L,1*U(U)>] { GHC.Types.I# x_a4kO [Dmd=<S,U>] ->
-    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# x_a4kO 0#)
+$s^_s4he =
+  \ (eta_a38o [Dmd=<L,U(U(U),U(U))>] :: Complex Double)
+    (eta1_a38p [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case eta1_a38p
+    of wild_a4l0 [Dmd=<L,1*U(U)>] { GHC.Types.I# x_a4l2 [Dmd=<S,U>] ->
+    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# x_a4l2 0#)
     of _ [Occ=Dead, Dmd=<L,A>] {
       False ->
-        case x_a4kO of _ [Occ=Dead, Dmd=<L,A>] {
-          __DEFAULT -> f_s4i8 eta_a38a wild_a4kM;
-          0# -> lvl_s4iA
+        case x_a4l2 of _ [Occ=Dead, Dmd=<L,A>] {
+          __DEFAULT -> f_s4im eta_a38o wild_a4l0;
+          0# -> lvl_s4iO
         };
-      True -> lvl_s4iD
+      True -> lvl_s4iR
     }
     }
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s46I :: GHC.Types.TrName
+$trModule_s46W :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s46I = GHC.Types.TrNameS "main"#
+$trModule_s46W = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s46J :: GHC.Types.TrName
+$trModule_s46X :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s46J = GHC.Types.TrNameS "Dum"#
+$trModule_s46X = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -166,7 +166,7 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_s46I $trModule_s46J
+Dum.$trModule = GHC.Types.Module $trModule_s46W $trModule_s46X
 
 -- RHS size: {terms: 32, types: 8, coercions: 0}
 f :: Int -> Complex Double
@@ -176,39 +176,39 @@ f :: Int -> Complex Double
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 122 0}]
 f =
-  \ (n_a2Ke [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case n_a2Ke
-    of n_X2Ki [Dmd=<L,1*U(U)>] { GHC.Types.I# ipv_s479 [Dmd=<S,U>] ->
-    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# ipv_s479 0#)
+  \ (n_a2Kt [Dmd=<S(S),1*U(U)>] :: Int) ->
+    case n_a2Kt
+    of n_X2Kx [Dmd=<L,1*U(U)>] { GHC.Types.I# ipv_s47n [Dmd=<S,U>] ->
+    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# ipv_s47n 0#)
     of _ [Occ=Dead, Dmd=<L,A>] {
       False ->
-        case ipv_s479 of wild_XL {
+        case ipv_s47n of wild_XL {
           __DEFAULT ->
-            f_s4i8
+            f_s4im
               (case GHC.Prim./##
                       6.283185307179586## (GHC.Prim.int2Double# wild_XL)
-               of wild2_a4lh { __DEFAULT ->
+               of wild2_a4lv { __DEFAULT ->
                Data.Complex.:+
                  @ Double
-                 (GHC.Types.D# (GHC.Prim.cosDouble# wild2_a4lh))
-                 (GHC.Types.D# (GHC.Prim.sinDouble# wild2_a4lh))
+                 (GHC.Types.D# (GHC.Prim.cosDouble# wild2_a4lv))
+                 (GHC.Types.D# (GHC.Prim.sinDouble# wild2_a4lv))
                })
-              n_X2Ki;
-          0# -> lvl_s4iA
+              n_X2Kx;
+          0# -> lvl_s4iO
         };
-      True -> lvl_s4iD
+      True -> lvl_s4iR
     }
     }
 
 
 ------ Local rules for imported ids --------
 "SPEC/Dum even @ Int" [ALWAYS]
-    forall ($dIntegral_s4hx :: Integral Int).
-      even @ Int $dIntegral_s4hx
-      = $seven_s4hy
+    forall ($dIntegral_s4hL :: Integral Int).
+      even @ Int $dIntegral_s4hL
+      = $seven_s4hM
 "SPEC/Dum ^ @ (Complex Double) @ Int" [1]
-    forall ($dNum_s4gY :: Num (Complex Double))
-           ($dIntegral_s4gZ :: Integral Int).
-      ^ @ (Complex Double) @ Int $dNum_s4gY $dIntegral_s4gZ
-      = $s^_s4h0
+    forall ($dNum_s4hc :: Num (Complex Double))
+           ($dIntegral_s4hd :: Integral Int).
+      ^ @ (Complex Double) @ Int $dNum_s4hc $dIntegral_s4hd
+      = $s^_s4he
 

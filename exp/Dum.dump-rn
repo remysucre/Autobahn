@@ -1,6 +1,6 @@
 
 ==================== Renamer ====================
 Dum.f :: Int -> Complex Double
-Dum.f (!n_a2Ke)
-  = mkPolar 1 ((2 * pi) / fromIntegral n_a2Ke) ^ n_a2Ke
+Dum.f (!n_a2Kt)
+  = mkPolar 1 ((2 * pi) / fromIntegral n_a2Kt) ^ n_a2Kt
 
