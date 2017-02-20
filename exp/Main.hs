@@ -41,7 +41,7 @@ mentions _ _ = False
 annotate :: Pat -> DP.Dmd -> Pat
 annotate (PBangPat p)  (DP.S, _)= PAsPat (Ident "safebang") (PBangPat p)
 annotate (PBangPat p) (_, DP.A)=  PAsPat (Ident "remove") (PBangPat p) -- absent, might as well take bang off
-annotate (PBangPat p) (_, _)=  PAsPat (Ident "investigate") (PBangPat p) -- absent, might as well take bang off
+annotate (PBangPat p) (_, _)=  PAsPat (Ident "lazydmd") (PBangPat p) -- absent, might as well take bang off
 annotate p _ = p
 
 safePats :: [Pat] -> [DP.Annot] -> [Pat]
@@ -61,8 +61,9 @@ markSafePats sps x = runState (transformBiM go x) sps
           case p
             of (PAsPat (Ident "safebang") _) -> return pb
                (PAsPat (Ident "remove") _) -> return (PAsPat (Ident "removed") pv)
+               (PAsPat (Ident "lazydmd") _) -> return (PAsPat (Ident "lazydmd") pv)
                -- (PBangPat _) -> return (PAsPat (Ident "investigate") pv)
-               _ -> return (PAsPat (Ident "investigate") pv)
+               _ -> return (PAsPat (Ident "norecord") pv)
         go px = do
           (_:ps) <- get
           put ps
