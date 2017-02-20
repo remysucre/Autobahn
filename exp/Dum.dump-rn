@@ -1,31 +1,34 @@
 
 ==================== Renamer ====================
-Dum.returnM :: x_azx -> Maybe x_azx
-Dum.returnM x_azy = Just x_azy
-Dum.eachM :: Maybe x_azv -> (x_azv -> y_azw) -> Maybe y_azw
-Dum.eachM ((!(Just x_azz))) (!f_azA) = Just (f_azA x_azz)
-Dum.eachM Nothing (!f_azB) = Nothing
-Dum.thenM :: Maybe x_azt -> (x_azt -> Maybe y_azu) -> Maybe y_azu
-Dum.thenM ((!(Just x_azC))) kM_azD = kM_azD x_azC
-Dum.thenM Nothing (!kM_azE) = Nothing
-Dum.failM :: Maybe x_azs
-Dum.failM = Nothing
-Dum.orM :: Maybe x_azr -> Maybe x_azr -> Maybe x_azr
-Dum.orM (Just x_azF) yM_azG = Just x_azF
-Dum.orM Nothing (!yM_azH) = yM_azH
-Dum.guardM :: Bool -> Maybe x_azq -> Maybe x_azq
-Dum.guardM (!b_azI) (!xM_azJ) = if b_azI then xM_azJ else Dum.failM
-Dum.filterM :: (x_azp -> Bool) -> Maybe x_azp -> Maybe x_azp
-Dum.filterM p_azK xM_azL
-  = xM_azL
-    `Dum.thenM`
-      (\ (!x_azM) -> p_azK x_azM `Dum.guardM` Dum.returnM x_azM)
-Dum.theM :: Maybe x_azo -> x_azo
-Dum.theM (!((!(Just x_azN)))) = x_azN
-Dum.existsM :: Maybe x_asj -> Bool
-Dum.existsM ((!(Just x_azO))) = True
-Dum.existsM Nothing = False
-Dum.useM :: x_asi -> Maybe x_asi -> x_asi
-Dum.useM xfail_azP ((!(Just (!x_azQ)))) = x_azQ
-Dum.useM xfail_azR (!Nothing) = xfail_azR
+Dum.integrate1D :: Double -> Double -> (Double -> Double) -> Double
+Dum.integrate1D (!l_azc) u_azd (!f_aze)
+  = let (!d_azf) = (u_azd - l_azc) / 8.0
+    in
+      d_azf
+      * sum
+          [(f_aze l_azc) * 0.5, f_aze (l_azc + d_azf),
+           f_aze (l_azc + (2.0 * d_azf)), f_aze (l_azc + (3.0 * d_azf)),
+           f_aze (l_azc + (4.0 * d_azf)), f_aze (u_azd - (3.0 * d_azf)),
+           f_aze (u_azd - (2.0 * d_azf)), f_aze (u_azd - d_azf),
+           (f_aze u_azd) * 0.5]
+Dum.integrate2D l1_a12X u1_a12Y (!l2_a12Z) (!u2_a130) f_a131
+  = Dum.integrate1D
+      l2_a12Z
+      u2_a130
+      (\ (!y_a132)
+         -> Dum.integrate1D
+              l1_a12X u1_a12Y (\ x_a133 -> f_a131 x_a133 y_a132))
+Dum.zark u_a134 v_a135
+  = Dum.integrate2D
+      0.0 u_a134 0.0 v_a135 (\ x_a136 -> (\ y_a137 -> x_a136 * y_a137))
+Dum.ints = [1.0 .. ] :: [Double]
+Dum.zarks = zipWith Dum.zark Dum.ints (map (2.0 *) Dum.ints)
+Dum.rtotals
+  = head Dum.zarks : zipWith (+) (tail Dum.zarks) Dum.rtotals
+Dum.rtotal n_a16O = Dum.rtotals !! n_a16O
+Dum.is = map (^ 4) Dum.ints
+Dum.itotals = head Dum.is : zipWith (+) (tail Dum.is) Dum.itotals
+Dum.itotal (!n_a16P) = Dum.itotals !! n_a16P
+Dum.es = map (^ 2) (zipWith (-) Dum.rtotals Dum.itotals)
+Dum.etotal (!n_a16Q) = sum (take n_a16Q Dum.es)
 
