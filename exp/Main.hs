@@ -8,19 +8,21 @@ import System.Environment
 import System.Process
 import Language.Haskell.Exts
 import Data.Generics.Uniplate.Data
+import Data.List
 import Control.Monad.State.Strict
 
 main :: IO ()
 main = do
-  [fn] <- getArgs
-  parOrig <- par fn
-  let mainStripped = dropMain $ renameModule parOrig defaultModuleName
-  writeFile "Dum.hs" (prettyPrint mainStripped)
-  _ <- system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
-  fcd <- dumprn2hs "Dum"
+  [fp] <- getArgs
+  let fn = dropWhileEnd (/= '.') . dropWhileEnd (/= '.') $ fp
+  -- parOrig <- par fn
+  -- let mainStripped = dropMain $ renameModule parOrig defaultModuleName
+  -- writeFile "Dum.hs" (prettyPrint mainStripped)
+  -- _ <- system "ghc -O2 Dum.hs -ddump-rn -ddump-stranal -ddump-to-file -fforce-recomp"
+  fcd <- dumprn2hs fp
   writeFile "Dumrn.hs" fcd
 
-  !fc <- readFile "Dum.dump-stranal"
+  !fc <- readFile $ fp ++ "dump-stranal"
   let Right res = DP.parse DP.stranal "src" fc
   home <- getEnv "HOME"
   parres <- par $  home ++ "/Autobahn/exp/Dumrn.hs"
