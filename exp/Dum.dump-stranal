@@ -1,164 +1,206 @@
 
 ==================== Demand analysis ====================
-2017-02-19 22:21:16.701211 UTC
+2017-02-20 01:45:59.057313 UTC
 
 Result size of Demand analysis
-  = {terms: 168, types: 70, coercions: 4}
+  = {terms: 127, types: 169, coercions: 0}
 
--- RHS size: {terms: 4, types: 3, coercions: 4}
-lvl_s4iR :: Complex Double
-[LclId, Str=DmdType x]
-lvl_s4iR =
-  error
-    @ 'GHC.Types.PtrRepLifted
-    @ (Complex Double)
-    (GHC.Err.errorWithoutStackTrace_wild1
-     `cast` (Sym
-               (GHC.Classes.N:IP[0] <"callStack">_N <GHC.Stack.Types.CallStack>_N)
-             :: (GHC.Stack.Types.CallStack :: *)
-                ~R#
-                ((?callStack::GHC.Stack.Types.CallStack) :: Constraint)))
-    (GHC.CString.unpackCString# "Negative exponent"#)
-
--- RHS size: {terms: 12, types: 4, coercions: 0}
-$seven_s4hM :: Int -> Bool
-[LclId,
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+returnM :: forall x_azx. x_azx -> Maybe x_azx
+[LclIdX,
  Arity=1,
- Str=DmdType <S(S),1*U(U)>,
+ Str=DmdType <L,U>m2,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 31 20}]
-$seven_s4hM =
-  \ (eta_a4hH [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta_a4hH
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
-      __DEFAULT -> GHC.Types.False;
-      0# -> GHC.Types.True
-    }
-    }
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)}]
+returnM = GHC.Base.Just
 
-Rec {
--- RHS size: {terms: 41, types: 9, coercions: 0}
-g1_s4iy [Occ=LoopBreaker]
-  :: Complex Double -> Int -> Complex Double -> Complex Double
-[LclId,
- Arity=3,
- CallArity=3,
- Str=DmdType <S(SS),U(U(U),U(U))><S(S),1*U(U)><S(SS),1*U(U(U),U(U))>m,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20 0] 274 0}]
-g1_s4iy =
-  \ (x1_a44s [Dmd=<S(SS),U(U(U),U(U))>] :: Complex Double)
-    (y1_a44t [Dmd=<S(S),1*U(U)>] :: Int)
-    (z_a44u [Dmd=<S(SS),1*U(U(U),U(U))>] :: Complex Double) ->
-    case y1_a44t
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
-      __DEFAULT ->
-        case x1_a4jG of wild_XK {
-          __DEFAULT ->
-            g1_s4iy
-              (Data.Complex.$fFloatingComplex_$s$c* x1_a44s x1_a44s)
-              (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
-              (Data.Complex.$fFloatingComplex_$s$c* x1_a44s z_a44u);
-          1# -> Data.Complex.$fFloatingComplex_$s$c* x1_a44s z_a44u
-        };
-      0# ->
-        g1_s4iy
-          (Data.Complex.$fFloatingComplex_$s$c* x1_a44s x1_a44s)
-          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4jG 2#))
-          z_a44u
-    }
-    }
-end Rec }
-
-Rec {
--- RHS size: {terms: 35, types: 7, coercions: 0}
-f_s4im [Occ=LoopBreaker] :: Complex Double -> Int -> Complex Double
-[LclId,
+-- RHS size: {terms: 18, types: 17, coercions: 0}
+eachM
+  :: forall x_azv y_azw.
+     Maybe x_azv -> (x_azv -> y_azw) -> Maybe y_azw
+[LclIdX,
  Arity=2,
- CallArity=2,
- Str=DmdType <S,U(U(U),U(U))><S(S),1*U(U)>m,
+ Str=DmdType <S,1*U><S,1*U>,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 204 0}]
-f_s4im =
-  \ (x_a44d [Dmd=<S,U(U(U),U(U))>] :: Complex Double)
-    (y_a44e [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case y_a44e
-    of _ [Occ=Dead, Dmd=<L,A>] { GHC.Types.I# x1_a4jG [Dmd=<S,U>] ->
-    case GHC.Prim.remInt# x1_a4jG 2# of _ [Occ=Dead, Dmd=<L,A>] {
-      __DEFAULT ->
-        case x1_a4jG of wild_XK {
-          __DEFAULT ->
-            g1_s4iy
-              (Data.Complex.$fFloatingComplex_$s$c* x_a44d x_a44d)
-              (GHC.Types.I# (GHC.Prim.quotInt# (GHC.Prim.-# wild_XK 1#) 2#))
-              x_a44d;
-          1# -> x_a44d
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [40 20] 70 30}]
+eachM =
+  \ (@ x_aBG)
+    (@ y_aBH)
+    (ds_dCV [Dmd=<S,1*U>] :: Maybe x_aBG)
+    (f_azA [Dmd=<S,1*U>] :: x_aBG -> y_aBH) ->
+    case ds_dCV of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing ->
+        case f_azA of _ [Occ=Dead, Dmd=<L,A>] { __DEFAULT ->
+        GHC.Base.Nothing @ y_aBH
         };
-      0# ->
-        f_s4im
-          (Data.Complex.$fFloatingComplex_$s$c* x_a44d x_a44d)
-          (GHC.Types.I# (GHC.Prim.quotInt# x1_a4jG 2#))
+      Just x_azz ->
+        case f_azA of f_XzI [Dmd=<L,1*C1(U)>] { __DEFAULT ->
+        GHC.Base.Just @ y_aBH (f_XzI x_azz)
+        }
+    }
+
+-- RHS size: {terms: 14, types: 16, coercions: 0}
+thenM
+  :: forall x_azt y_azu.
+     Maybe x_azt -> (x_azt -> Maybe y_azu) -> Maybe y_azu
+[LclIdX,
+ Arity=2,
+ Str=DmdType <S,1*U><S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [40 60] 50 10}]
+thenM =
+  \ (@ x_aBo)
+    (@ y_aBp)
+    (ds_dCQ [Dmd=<S,1*U>] :: Maybe x_aBo)
+    (kM_azD [Dmd=<S,1*U>] :: x_aBo -> Maybe y_aBp) ->
+    case ds_dCQ of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing ->
+        case kM_azD of _ [Occ=Dead, Dmd=<L,A>] { __DEFAULT ->
+        GHC.Base.Nothing @ y_aBp
+        };
+      Just x_azC -> kM_azD x_azC
+    }
+
+-- RHS size: {terms: 1, types: 0, coercions: 0}
+failM :: forall x_azs. Maybe x_azs
+[LclIdX,
+ Str=DmdType,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=0,unsat_ok=True,boring_ok=True)}]
+failM = GHC.Base.Nothing
+
+-- RHS size: {terms: 15, types: 10, coercions: 0}
+guardM :: forall x_azq. Bool -> Maybe x_azq -> Maybe x_azq
+[LclIdX,
+ Arity=2,
+ Str=DmdType <S,1*U><S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20 20] 40 10}]
+guardM =
+  \ (@ x_aAN)
+    (b_azI [Dmd=<S,1*U>] :: Bool)
+    (xM_azJ [Dmd=<S,1*U>] :: Maybe x_aAN) ->
+    case b_azI of b_XzQ [Dmd=<S,1*U>] { __DEFAULT ->
+    case xM_azJ of xM_XzS [Dmd=<L,1*U>] { __DEFAULT ->
+    case b_XzQ of _ [Occ=Dead, Dmd=<L,A>] {
+      False -> GHC.Base.Nothing @ x_aAN;
+      True -> xM_XzS
     }
     }
-end Rec }
+    }
+
+-- RHS size: {terms: 19, types: 14, coercions: 0}
+filterM
+  :: forall x_azp. (x_azp -> Bool) -> Maybe x_azp -> Maybe x_azp
+[LclIdX,
+ Arity=2,
+ Str=DmdType <L,1*C1(U)><S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True, Guidance=IF_ARGS [60 30] 80 40}]
+filterM =
+  \ (@ x_aAB)
+    (p_azK [Dmd=<L,1*C1(U)>] :: x_aAB -> Bool)
+    (xM_azL [Dmd=<S,1*U>] :: Maybe x_aAB) ->
+    case xM_azL of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing -> GHC.Base.Nothing @ x_aAB;
+      Just x_azC [Dmd=<S,1*U>] ->
+        case x_azC of x_XzW { __DEFAULT ->
+        case p_azK x_XzW of _ [Occ=Dead, Dmd=<L,A>] {
+          False -> GHC.Base.Nothing @ x_aAB;
+          True -> GHC.Base.Just @ x_aAB x_XzW
+        }
+        }
+    }
+
+-- RHS size: {terms: 10, types: 10, coercions: 0}
+orM :: forall x_azr. Maybe x_azr -> Maybe x_azr -> Maybe x_azr
+[LclIdX,
+ Arity=2,
+ Str=DmdType <S,1*U><L,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=2,unsat_ok=True,boring_ok=True)}]
+orM =
+  \ (@ x_aAZ)
+    (ds_dCJ [Dmd=<S,1*U>] :: Maybe x_aAZ)
+    (yM_azG [Dmd=<L,1*U>] :: Maybe x_aAZ) ->
+    case ds_dCJ of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing -> yM_azG;
+      Just x_azF -> GHC.Base.Just @ x_aAZ x_azF
+    }
+
+-- RHS size: {terms: 3, types: 4, coercions: 0}
+lvl_sDB :: forall x_aAn. x_aAn
+[LclId, Str=DmdType x]
+lvl_sDB =
+  \ (@ x_aAn) ->
+    Control.Exception.Base.patError
+      @ 'GHC.Types.PtrRepLifted @ x_aAn "Dum.hs:29:1-25|function theM"#
+
+-- RHS size: {terms: 8, types: 8, coercions: 0}
+theM :: forall x_azo. Maybe x_azo -> x_azo
+[LclIdX,
+ Arity=1,
+ Str=DmdType <S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=True)}]
+theM =
+  \ (@ x_aAn) (ds_dCC [Dmd=<S,1*U>] :: Maybe x_aAn) ->
+    case ds_dCC of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing -> lvl_sDB @ x_aAn;
+      Just x_azN [Dmd=<S,1*U>] -> x_azN
+    }
+
+-- RHS size: {terms: 8, types: 7, coercions: 0}
+existsM :: forall x_asj. Maybe x_asj -> Bool
+[LclIdX,
+ Arity=1,
+ Str=DmdType <S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=1,unsat_ok=True,boring_ok=True)}]
+existsM =
+  \ (@ x_aAd) (ds_dCx [Dmd=<S,1*U>] :: Maybe x_aAd) ->
+    case ds_dCx of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing -> GHC.Types.False;
+      Just x_azO [Dmd=<L,A>] -> GHC.Types.True
+    }
+
+-- RHS size: {terms: 9, types: 8, coercions: 0}
+useM :: forall x_asi. x_asi -> Maybe x_asi -> x_asi
+[LclIdX,
+ Arity=2,
+ Str=DmdType <L,1*U><S,1*U>,
+ Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
+         WorkFree=True, Expandable=True,
+         Guidance=ALWAYS_IF(arity=2,unsat_ok=True,boring_ok=True)}]
+useM =
+  \ (@ x_aA3)
+    (xfail_azP [Dmd=<L,1*U>] :: x_aA3)
+    (ds_dCs [Dmd=<S,1*U>] :: Maybe x_aA3) ->
+    case ds_dCs of _ [Occ=Dead, Dmd=<L,A>] {
+      Nothing -> xfail_azP;
+      Just x_azQ [Dmd=<S,1*U>] -> x_azQ
+    }
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-lvl_s4kX :: Double
-[LclId,
- Str=DmdType m,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 20}]
-lvl_s4kX = GHC.Types.D# 1.0##
-
--- RHS size: {terms: 3, types: 1, coercions: 0}
-lvl_s4iO :: Complex Double
-[LclId,
- Str=DmdType m,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-lvl_s4iO =
-  Data.Complex.:+ @ Double lvl_s4kX Data.Complex.$fFloatingComplex1
-
--- RHS size: {terms: 21, types: 8, coercions: 0}
-$s^_s4he [InlPrag=[1]] :: Complex Double -> Int -> Complex Double
-[LclId,
- Arity=2,
- Str=DmdType <L,U(U(U),U(U))><S(S),1*U(U)>m,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [0 20] 82 0}]
-$s^_s4he =
-  \ (eta_a38o [Dmd=<L,U(U(U),U(U))>] :: Complex Double)
-    (eta1_a38p [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case eta1_a38p
-    of wild_a4l0 [Dmd=<L,1*U(U)>] { GHC.Types.I# x_a4l2 [Dmd=<S,U>] ->
-    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# x_a4l2 0#)
-    of _ [Occ=Dead, Dmd=<L,A>] {
-      False ->
-        case x_a4l2 of _ [Occ=Dead, Dmd=<L,A>] {
-          __DEFAULT -> f_s4im eta_a38o wild_a4l0;
-          0# -> lvl_s4iO
-        };
-      True -> lvl_s4iR
-    }
-    }
-
--- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s46W :: GHC.Types.TrName
+$trModule_sDk :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s46W = GHC.Types.TrNameS "main"#
+$trModule_sDk = GHC.Types.TrNameS "main"#
 
 -- RHS size: {terms: 2, types: 0, coercions: 0}
-$trModule_s46X :: GHC.Types.TrName
+$trModule_sDl :: GHC.Types.TrName
 [LclId,
  Str=DmdType m1,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 30 20}]
-$trModule_s46X = GHC.Types.TrNameS "Dum"#
+$trModule_sDl = GHC.Types.TrNameS "Dum"#
 
 -- RHS size: {terms: 3, types: 0, coercions: 0}
 Dum.$trModule :: GHC.Types.Module
@@ -166,49 +208,6 @@ Dum.$trModule :: GHC.Types.Module
  Str=DmdType m,
  Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
          WorkFree=True, Expandable=True, Guidance=IF_ARGS [] 10 30}]
-Dum.$trModule = GHC.Types.Module $trModule_s46W $trModule_s46X
+Dum.$trModule = GHC.Types.Module $trModule_sDk $trModule_sDl
 
--- RHS size: {terms: 32, types: 8, coercions: 0}
-f :: Int -> Complex Double
-[LclIdX,
- Arity=1,
- Str=DmdType <S(S),1*U(U)>m,
- Unf=Unf{Src=<vanilla>, TopLvl=True, Value=True, ConLike=True,
-         WorkFree=True, Expandable=True, Guidance=IF_ARGS [20] 122 0}]
-f =
-  \ (n_a2Kt [Dmd=<S(S),1*U(U)>] :: Int) ->
-    case n_a2Kt
-    of n_X2Kx [Dmd=<L,1*U(U)>] { GHC.Types.I# ipv_s47n [Dmd=<S,U>] ->
-    case GHC.Prim.tagToEnum# @ Bool (GHC.Prim.<# ipv_s47n 0#)
-    of _ [Occ=Dead, Dmd=<L,A>] {
-      False ->
-        case ipv_s47n of wild_XL {
-          __DEFAULT ->
-            f_s4im
-              (case GHC.Prim./##
-                      6.283185307179586## (GHC.Prim.int2Double# wild_XL)
-               of wild2_a4lv { __DEFAULT ->
-               Data.Complex.:+
-                 @ Double
-                 (GHC.Types.D# (GHC.Prim.cosDouble# wild2_a4lv))
-                 (GHC.Types.D# (GHC.Prim.sinDouble# wild2_a4lv))
-               })
-              n_X2Kx;
-          0# -> lvl_s4iO
-        };
-      True -> lvl_s4iR
-    }
-    }
-
-
------- Local rules for imported ids --------
-"SPEC/Dum even @ Int" [ALWAYS]
-    forall ($dIntegral_s4hL :: Integral Int).
-      even @ Int $dIntegral_s4hL
-      = $seven_s4hM
-"SPEC/Dum ^ @ (Complex Double) @ Int" [1]
-    forall ($dNum_s4hc :: Num (Complex Double))
-           ($dIntegral_s4hd :: Integral Int).
-      ^ @ (Complex Double) @ Int $dNum_s4hc $dIntegral_s4hd
-      = $s^_s4he
 

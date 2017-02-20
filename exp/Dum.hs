@@ -1,7 +1,37 @@
 {-# LANGUAGE BangPatterns #-}
 module Dum where
-import Data.Complex
-import System.Environment
 
-f :: Int -> Complex Double
-f (!n) = mkPolar 1 ((2 * pi) / fromIntegral n) ^ n
+returnM :: x -> Maybe x
+returnM x = Just x
+
+eachM :: Maybe x -> (x -> y) -> Maybe y
+eachM ((!(Just x))) (!f) = Just (f x)
+eachM Nothing (!f) = Nothing
+
+thenM :: Maybe x -> (x -> Maybe y) -> Maybe y
+thenM ((!(Just x))) kM = kM x
+thenM Nothing (!kM) = Nothing
+
+failM :: Maybe x
+failM = Nothing
+
+orM :: Maybe x -> Maybe x -> Maybe x
+orM (Just x) yM = Just x
+orM Nothing (!yM) = yM
+
+guardM :: Bool -> Maybe x -> Maybe x
+guardM (!b) (!xM) = if b then xM else failM
+
+filterM :: (x -> Bool) -> Maybe x -> Maybe x
+filterM p xM = xM `thenM` (\ (!x) -> p x `guardM` returnM x)
+
+theM :: Maybe x -> x
+theM (!((!(Just x)))) = x
+
+existsM :: Maybe x -> Bool
+existsM ((!(Just x))) = True
+existsM Nothing = False
+
+useM :: x -> Maybe x -> x
+useM xfail ((!(Just (!x)))) = x
+useM xfail (!Nothing) = xfail
