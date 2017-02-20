@@ -14,7 +14,7 @@ dumprn2hs fp = do
   let fn = takeWhile (/= '.') . reverse . takeWhile (/= '/') . reverse $ fp
   let fp0 = takeWhile (/= '.') fp
   fc <- readFile $ fp0 ++ ".dump-rn"
-  putStrLn fc
+  -- putStrLn fc
   let fc' =  replace (fn ++ ".") "" fc
   return . (fc0 ++) . ("\n" ++) . unlines . drop 2 . lines $ fc'
 
