@@ -14,7 +14,8 @@ import Control.Monad.State.Strict
 main :: IO ()
 main = do
   [fp] <- getArgs
-  let fn = dropWhileEnd (/= '.') . dropWhileEnd (/= '.') $ fp
+  -- let fn = dropWhileEnd (/= '.') . dropWhileEnd (/= '.') $ fp
+  let fn = takeWhile (/= '.') fp
   -- parOrig <- par fn
   -- let mainStripped = dropMain $ renameModule parOrig defaultModuleName
   -- writeFile "Dum.hs" (prettyPrint mainStripped)
@@ -22,7 +23,7 @@ main = do
   fcd <- dumprn2hs fp
   writeFile "Dumrn.hs" fcd
 
-  !fc <- readFile $ fp ++ "dump-stranal"
+  !fc <- readFile $ fn ++ ".dump-stranal"
   let Right res = DP.parse DP.stranal "src" fc
   home <- getEnv "HOME"
   parres <- par $  home ++ "/Autobahn/exp/Dumrn.hs"

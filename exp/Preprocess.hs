@@ -8,10 +8,12 @@ import Language.Haskell.Exts
 
 dumprn2hs :: String -> IO String
 dumprn2hs fp = do
-  ParseOk (Module a b c d e f _) <- parseFileWithMode (bangParseMode $ fp ++ ".hs") (fp ++ ".hs")
+  -- ParseOk (Module a b c d e f _) <- parseFileWithMode (bangParseMode $ fp ++ ".hs") (fp ++ ".hs")
+  ParseOk (Module a b c d e f _) <- parseFileWithMode (bangParseMode fp) fp 
   let fc0 = prettyPrint (Module a b c d e f [])
   let fn = takeWhile (/= '.') . reverse . takeWhile (/= '/') . reverse $ fp
-  fc <- readFile $ fp ++ ".dump-rn"
+  let fp0 = takeWhile (/= '.') fp
+  fc <- readFile $ fp0 ++ ".dump-rn"
   putStrLn fc
   let fc' =  replace (fn ++ ".") "" fc
   return . (fc0 ++) . ("\n" ++) . unlines . drop 2 . lines $ fc'
