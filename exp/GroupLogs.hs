@@ -14,4 +14,4 @@ main = do
 
 labelDir l = "echo START PROG " 
           ++ (dropWhileEnd (/= '/') . dropWhile (/= '~') $ l)
-          ++ ";"
+          ++ " >> temp;"
