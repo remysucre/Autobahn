@@ -5,26 +5,51 @@ main = do
   [fn] <- getArgs
   fc <- readFile fn
   let ls = lines fc
-  let cs = map countSafe ls
-  print . length $ cs
-  print cs
-  let cs' = map countLazy ls
-  print . length $ cs'
-  print cs'
-  let cs'' = map countNoRec ls
-  print . length $ cs''
-  print cs''
-  let total = zipWith (+) (zipWith (+) cs cs') cs''
+  let ps_0 = groupProgs ls
+  let ps = reverse $ sortBySize ps_0
+  let ss = map (\p -> sum $ map countSafe p) ps
+  print ss
+  let sl = map (\p -> sum $ map countLazy p) ps
+  print sl
+  let sn = map (\p -> sum $ map countNoRec p) ps
+  print sn
+  let total = zipWith (+) (zipWith (+) ss sl) sn
   print total
+  -- let cs = map countSafe ls
+  -- print . length $ cs
+  -- print cs
+  -- let cs' = map countLazy ls
+  -- print . length $ cs'
+  -- print cs'
+  -- let cs'' = map countNoRec ls
+  -- print . length $ cs''
+  -- print cs''
+  -- let total = zipWith (+) (zipWith (+) cs cs') cs''
+  -- print total
   -- let logs = annotations ls
   -- putStrLn . unlines $ logs
+
+count :: (a -> Bool) -> [a] -> Int
+count p = length . filter p
+
+sortBySize :: [[String]] -> [[String]]
+sortBySize ps = sortOn (\p -> sum $ map length p) ps
+
+sortByBangs :: [[String]] -> [[String]]
+sortByBangs ps = sortOn (\p -> sum $ map (count (== '!')) p) ps
+
+groupProgs :: [String] -> [[String]]
+groupProgs ls@(_:_) = l:groupProgs ls'
+  where l = takeWhile (not . isPrefixOf "START PROG") ls
+        ls' = tail $ dropWhile (not . isPrefixOf "START PROG") ls
+groupProgs x = [x]
 
 annotations :: [String] -> [String]
 annotations = filter isLog
 
 isLog :: String -> Bool
 isLog ('[':_) = True
-isLog _ = False
+isLog x = "START PROG" `isPrefixOf` x 
 
 countSafe :: String -> Int
 countSafe l = 
