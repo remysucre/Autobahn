@@ -10,7 +10,7 @@ main :: IO ()
 main = do
   [fn] <- getArgs
   fc <- readFile fn
-  let lg = parse parseProg "" fc
+  let lg = parse (P.many parseProg) "" fc
   print lg
 
 data ProgLog = Prog FilePath [DmdLog]
@@ -22,12 +22,12 @@ parseProg :: Parser ProgLog
 parseProg = do
   _ <- P.string "START PROG"
   fn <- P.manyTill P.anyToken (P.char '\n')
-  dmds <- P.many parseDmd
+  dmds <- P.many (P.try parseDmd)
   return $ Prog fn dmds
 
 parseDmd :: Parser DmdLog
 parseDmd = do
-  _ <- P.string "STARTLOG\n"
+  _ <- P.string "STARTLOG"
   dmdlog <- P.manyTill P.anyToken (P.string "ENDLOG\n")
   let ls = lines dmdlog
       annots_string = filter isLog ls
