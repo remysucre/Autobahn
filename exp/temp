@@ -8244,3 +8244,4 @@ etotal (norecord@n_aIz) = sum (take n_aIz es)
 main
   = do [range_aIA] <- getArgs
        putStrLn $ show $ etotal $ read range_aIA
+STARTLOG
