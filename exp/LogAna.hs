@@ -15,6 +15,8 @@ main = do
   print sn
   let total = zipWith (+) (zipWith (+) ss sl) sn
   print total
+  let sortedByB = unzip4 . reverse . sortOn (\(t, _, _, _) -> t) $ zip4 total ss sl sn
+  print sortedByB 
   -- let cs = map countSafe ls
   -- print . length $ cs
   -- print cs
