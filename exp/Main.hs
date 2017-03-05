@@ -1,5 +1,5 @@
 {-# LANGUAGE BangPatterns, FlexibleContexts #-}
--- import Debug.Trace
+import Debug.Trace
 
 import qualified DmdParser as DP
 import Preprocess
@@ -41,7 +41,7 @@ mentions _ _ = False
 annotate :: Pat -> DP.Dmd -> Pat
 annotate (PBangPat p)  (DP.S, _)= PAsPat (Ident "safebang") (PBangPat p)
 annotate (PBangPat p) (_, DP.A)=  PAsPat (Ident "remove") (PBangPat p) -- absent, might as well take bang off
-annotate (PBangPat p) (_, _)=  PAsPat (Ident "lazydmd") (PBangPat p) -- absent, might as well take bang off
+annotate (PBangPat p) dmd@(_, _)=  trace (show dmd ++ show (PBangPat p)) PAsPat (Ident "lazydmd") (PBangPat p) -- absent, might as well take bang off
 annotate p _ = p
 
 safePats :: [Pat] -> [DP.Annot] -> [Pat]
