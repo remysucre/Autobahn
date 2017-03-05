@@ -6,8 +6,10 @@ main = do
   [fn] <- getArgs
   fc <- readFile fn
   let ls = lines fc
-  let ps_0 = groupProgs ls
-  let ps = reverse $ sortBySize ps_0
+      ps_0 = groupProgs ls
+  let ps_1 = reverse $ sortBySize ps_0
+      ps = map fst ps_1
+  print $ map snd (take 10 ps_1)
   let ss = map (sum . map countSafe) ps
   print ss
   let sl = map (sum . map countLazy) ps
@@ -35,17 +37,19 @@ main = do
 count :: (a -> Bool) -> [a] -> Int
 count p = length . filter p
 
-sortBySize :: [[String]] -> [[String]]
-sortBySize = sortOn (\p -> sum $ map length p)
+sortBySize :: [([String], String)] -> [([String], String)]
+sortBySize = sortOn (\(p, pn) -> sum $ map length p)
 
 sortByBangs :: [[String]] -> [[String]]
 sortByBangs = sortOn (\p -> sum $ map (count (== '!')) p)
 
-groupProgs :: [String] -> [[String]]
-groupProgs ls@(_:_) = l:groupProgs ls'
+groupProgs :: [String] -> [([String], String)]
+groupProgs ls@(_:_) = (l, pn):rest
   where l = takeWhile (not . isPrefixOf "START PROG") ls
         ls' = tail $ dropWhile (not . isPrefixOf "START PROG") ls
-groupProgs x = [x]
+        pn = head $ dropWhile (not . isPrefixOf "START PROG") ls
+        rest = groupProgs ls'
+groupProgs x = [(x, "haha")]
 
 annotations :: [String] -> [String]
 annotations = filter isLog
