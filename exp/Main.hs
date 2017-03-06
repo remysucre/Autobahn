@@ -1,5 +1,5 @@
 {-# LANGUAGE FlexibleContexts, DeriveDataTypeable #-}
--- import Debug.Trace
+import Debug.Trace
 
 import qualified DmdParser as DP
 import Preprocess
@@ -18,22 +18,31 @@ data Safe = Safe | Lazy | NoRecord | Remove
 main :: IO ()
 main = do
   [fn] <- getArgs
-  m <- par fn
-  -- get a list of safeness for all patterns
+  let fpOrig = fn ++ ".hs"
+      fpOpt = fn ++ ".hs.opt"
+      fpDmd = fn ++ ".dump-stranal"
+  m0 <- par fpOrig
+  print . length . binders $ m0
+  fcd <- dumprn2hs fn
+  writeFile "Dumrn.hs" fcd
+  m <- par "Dumrn.hs"
+  -- get a list of safety for all patterns
   annots <- getDmd fn
+  print annots
   -- get a bit vector showing all bangs
-  bs <- readBangs $ fn ++ ".opt"
+  bs <- readBangs fpOpt
+  print $ length bs
   let dmds = markWithAnnotes m annots
       bsSafety = safeBangs bs dmds
+  print dmds
+  print $ length dmds
   print bsSafety
   -- compare the two and return
-    -- 1. a list of safeness for bangs
-    -- 2. a module with bangs annotated with safeness
+    -- 1. a list of safety for bangs
+    -- 2. a module with bangs annotated with safety
 
 getDmd :: FilePath -> IO [DP.Annot]
 getDmd fp = do
-  fcd <- dumprn2hs fp
-  writeFile "Dumrn.hs" fcd
   anaFc <- readFile $ fp ++ ".dump-stranal"
   let Right res = DP.parse DP.stranal "src" anaFc
   return res
@@ -55,7 +64,7 @@ safeBangs :: [Bool] -> [Maybe DP.Annot] -> [Maybe Safe]
 safeBangs = zipWith bangSafety
   where bangSafety False _ = Nothing
         bangSafety True Nothing = Just NoRecord
-        bangSafety True (Just (DP.Annot _ (DP.S, _))) = Just Main.Safe
+        bangSafety True (Just (DP.Annot s (DP.S, _))) = trace s Just Main.Safe
         bangSafety True (Just (DP.Annot _ (_, DP.A))) = Just Remove
         bangSafety True (Just (DP.Annot _ (_, _))) = Just Lazy
 
@@ -69,7 +78,7 @@ markSafeBangs ss m = runState (transformBiM go m) ss
             of Nothing -> return p
                (Just Main.Safe) -> return (PAsPat (Ident "safebang") p)
                (Just Lazy) -> return (PAsPat (Ident "lazydmd") p)
-               (Just NoRecord) -> return (PAsPat (Ident "norecord") p)
+               (Just NoRecord) -> trace (show p) $ return (PAsPat (Ident "norecord") p)
                (Just Remove) -> return (PAsPat (Ident "unused") p)
 
 binders :: Module -> [Pat]
@@ -104,7 +113,7 @@ readBangs path = do
   res <- parseFileWithMode (bangParseMode path) path
   case res of
     ParseFailed _ e -> error e
-    ParseOk a       -> return . findBangs . findPats $ a
+    ParseOk a       -> return . findBangs . binders $ a
 
 findBangs :: [Pat] -> [Bool]
 findBangs = foldr addBang []
@@ -116,6 +125,7 @@ findBangs = foldr addBang []
 hasBang :: Pat -> Bool
 hasBang p = any isBang $ children p
   where isBang (PBangPat _) = True
+        isBang (PParen (PBangPat _)) = True
         isBang _ = False
 
 findPats :: Data a => a -> [Pat]

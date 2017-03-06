@@ -7,15 +7,14 @@ import Data.List
 import Language.Haskell.Exts
 
 dumprn2hs :: String -> IO String
-dumprn2hs fp = do
+dumprn2hs fn = do
   -- ParseOk (Module a b c d e f _) <- parseFileWithMode (bangParseMode $ fp ++ ".hs") (fp ++ ".hs")
+  let fp = fn ++ ".hs"
   ParseOk (Module a b c d e f _) <- parseFileWithMode (bangParseMode fp) fp 
   let fc0 = prettyPrint (Module a b c d e f [])
-  let fn = takeWhile (/= '.') . reverse . takeWhile (/= '/') . reverse $ fp
-  let fp0 = takeWhile (/= '.') fp
-  fc <- readFile $ fp0 ++ ".dump-rn"
-  -- putStrLn fc
-  let fc' =  replace (fn ++ ".") "" fc
+  fc <- readFile $ fn ++ ".dump-rn"
+  let fn' =  reverse . takeWhile (/= '/') . reverse $ fn
+  let fc' =  replace (fn' ++ ".") "" fc
   return . (fc0 ++) . ("\n" ++) . unlines . drop 2 . lines $ fc'
 
 replace :: (Eq a) => [a] -> [a] -> [a] -> [a]

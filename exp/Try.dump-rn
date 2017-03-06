@@ -1,0 +1,5 @@
+
+==================== Renamer ====================
+Main.main = print $ Main.foo 3
+Main.foo x_aqF = x_aqF + 1
+
