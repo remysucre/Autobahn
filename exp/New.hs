@@ -1,0 +1,4 @@
+-- run dmd analysis on original
+-- get dmd analysis info back to original source
+  -- search each renamed binder in the renamed dmd analysis
+-- zip result with bang vector

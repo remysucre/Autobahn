@@ -9,10 +9,50 @@ import System.Process
 import Language.Haskell.Exts
 import Data.Generics.Uniplate.Data
 import Data.List
+import Data.Generics
 import Control.Monad.State.Strict
 
 main :: IO ()
 main = do
+  [fp] <- getArgs
+  fc <- readFile fp
+  origMod <- par fc
+
+  let optFp = fp ++ ".opt"
+  optFc <- readFile optFp
+  optMod <- par optFc
+
+  let anaResult = dmdAna origMod
+      optAnnotated = optMod `markWith` anaResult
+  print optAnnotated
+
+-- annotate source module with demand information
+dmdAna :: FilePath -> IO Module
+dmdAna fp = do
+  fc <- readFile fp
+  m <- par fp
+  fcd <- dumprn2hs fp
+  writeFile "Dumrn.hs" fcd
+  anaFc <- readFile $ fp ++ ".dump-stranal"
+  let Right res = DP.parse DP.stranal "src" anaFc
+  home <- getEnv "HOME"
+  parres <- par $  home ++ "/Autobahn/exp/Dumrn.hs"
+  let bs = binders parres
+  let sbs = safePats bs res
+  print $ map prettyPrint sbs
+  let (safed, _) = markSafePats sbs parres
+  let marked = gzipWithQ mark safed m
+  return safed
+
+mark :: Pat -> Pat -> Pat
+
+
+markWith :: Module -> Module -> Module
+markWith = undefined
+
+
+mainold :: IO ()
+mainold = do
   [fp] <- getArgs
   -- let fn = dropWhileEnd (/= '.') . dropWhileEnd (/= '.') $ fp
   let fn = takeWhile (/= '.') fp
