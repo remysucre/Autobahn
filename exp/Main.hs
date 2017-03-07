@@ -117,16 +117,16 @@ readBangs path = do
 
 findBangs :: [Pat] -> [Bool]
 findBangs = foldr addBang []
-  where addBang (PBangPat _) bs = True:bs
-        addBang p bs
-          | hasBang p = bs
-          | otherwise = False:bs
+  where addBang (PParen (PBangPat _)) bs = True:bs
+        addBang (PBangPat _) bs = bs
+        addBang _ bs = False:bs
 
+{-
 hasBang :: Pat -> Bool
 hasBang p = any isBang $ children p
   where isBang (PBangPat _) = True
         isBang (PParen (PBangPat _)) = True
         isBang _ = False
-
+-}
 findPats :: Data a => a -> [Pat]
 findPats = universeBi

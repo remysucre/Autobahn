@@ -1,25 +1,55 @@
 module Main (main) where
-import System.Environment
-infix 8 ^^^
-
-int :: Nat -> Int
-int Z = 0
-int (S x_aLo) = 1 + int x_aLo
-x_aLp ^^^ Z = S Z
-x_aLq ^^^ (S y_aLr) = x_aLq * (x_aLq ^^^ y_aLr)
+start :: [[Int]]
+start
+  = [[], [], [], [], [], [], [], [], [], [], [], [], [], [],
+     [0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1,
+      1, 1, 1, 1, 0]]
+gen n_ana board_anb
+  = map row (shift (copy n_ana 0) board_anb)
+row (last_anc, this_and, next_ane)
+  = zipWith3
+      elt
+      (shift 0 last_anc)
+      (shift 0 this_and)
+      (shift 0 next_ane)
+elt
+  (a_aqQ, b_aqR, c_aqS)
+  (d_aqT, e_aqU, f_aqV)
+  (g_aqW, h_aqX, i_aqY)
+  | tot_aqZ < 2 || tot_aqZ > 3 = 0
+  | tot_aqZ == 3 = 1
+  | otherwise = e_aqU
+  where
+      tot_aqZ
+        = a_aqQ + b_aqR + c_aqS + d_aqT + f_aqV + g_aqW + h_aqX + i_aqY
+shiftr x_aFq xs_aFr = [x_aFq] ++ init xs_aFr
+shiftl x_aFs xs_aFt = tail xs_aFt ++ [x_aFs]
+shift x_aFu xs_aFv
+  = zip3 (shiftr x_aFu xs_aFv) xs_aFv (shiftl x_aFu xs_aFv)
+copy 0 x_aFw = []
+copy n_aFx x_aFy = x_aFy : copy (n_aFx - 1) x_aFy
+disp (gen_aFz, xss_aFA)
+  = gen_aFz
+    ++
+      "\n\
+      \\n"
+      ++
+        (foldr (glue "\n") "" . map (concat . map star)) xss_aFA
+star 0 = "  "
+star 1 = " o"
+glue s_aLx xs_aLy ys_aLz = xs_aLy ++ s_aLx ++ ys_aLz
+limit (x_aLA : y_aLB : xs_aLC)
+  | x_aLA == y_aLB = [x_aLA]
+  | otherwise = x_aLA : limit (y_aLB : xs_aLC)
 main
-  = do { [power_aLs] <- getArgs;
-         print $ int (3 ^^^ (fromInteger $ read power_aLs)) }
-
-data Nat
-  = Z | S Nat
-  deriving (Eq, Ord, Show)
-
-instance Num Nat where
-  Z + y_aPZ = y_aPZ
-  (S x_aQ0) + y_aQ1 = S (x_aQ0 + y_aQ1)
-  x_aQ2 * Z = Z
-  x_aQ3 * (S y_aQ4) = x_aQ3 * y_aQ4 + x_aQ3
-  fromInteger x_aQ5
-    = if x_aQ5 < 1 then Z else S (fromInteger (x_aQ5 - 1))
+  = putStr (last generations_aLE)
+  where
+      sz_aLD = 30
+      generations_aLE
+        = (map disp
+           . zip (map show [0 .. ]) . limit . iterate (gen sz_aLD))
+            (take
+               sz_aLD
+               (map (take sz_aLD . (++ (copy sz_aLD 0))) start
+                ++ copy sz_aLD (copy sz_aLD 0)))
 
