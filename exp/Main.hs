@@ -8,7 +8,7 @@ import System.Environment
 -- import System.Process
 import Language.Haskell.Exts
 import Data.Generics.Uniplate.Data
--- import Data.List
+import Data.List
 import Data.Generics
 import Control.Monad.State.Strict
 
@@ -21,6 +21,8 @@ main = do
   let fpOrig = fn ++ ".hs"
       fpOpt = fn ++ ".hs.opt"
       fpDmd = fn ++ ".dump-stranal"
+      fpLog = "/h/ywang30/minimizer-2017-03-07/" ++ (reverse . takeWhile (/= '/') . drop 1 . reverse . dropWhileEnd (/= '/') $ fn) ++ ".log"
+  print fpLog
   m0 <- par fpOrig
   print . length . binders $ m0
   fcd <- dumprn2hs fn
@@ -30,7 +32,9 @@ main = do
   annots <- getDmd fn
   print annots
   -- get a bit vector showing all bangs
-  bs <- readBangs fpOpt
+  log <- readFile fpLog
+  let bits = init . drop 23 $ log
+      bs = map (== '1') bits
   print $ length bs
   let dmds = markWithAnnotes m annots
       bsSafety = safeBangs bs dmds
